@@ -6,6 +6,7 @@ module.exports = {
     ecmaVersion: 7,
     sourceType: 'module',
   },
+  requireConfigFile: false,
   // 'eslint.workingDirectories': [{ mode: 'auto' }],
   rules: {
     'no-console': 'off',
