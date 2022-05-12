@@ -1,0 +1,73 @@
+@mixin space-padding(
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null,
+  $media: null
+) {
+  @if $media {
+    @media #{$media} {
+      padding-top: calc-to-rem($top);
+      padding-right: calc-to-rem($right);
+      padding-bottom: calc-to-rem($bottom);
+      padding-left: calc-to-rem($left);
+    }
+  } @else {
+    padding-top: calc-to-rem($top);
+    padding-right: calc-to-rem($right);
+    padding-bottom: calc-to-rem($bottom);
+    padding-left: calc-to-rem($left);
+  }
+}
+
+@mixin space-margin(
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null,
+  $media: null
+) {
+  @if $media {
+    @media #{$media} {
+      margin-top: calc-to-rem($top);
+      margin-right: calc-to-rem($right);
+      margin-bottom: calc-to-rem($bottom);
+      margin-left: calc-to-rem($left);
+    }
+  } @else {
+    margin-top: calc-to-rem($top);
+    margin-right: calc-to-rem($right);
+    margin-bottom: calc-to-rem($bottom);
+    margin-left: calc-to-rem($left);
+  }
+}
+
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
+@mixin position($position, $args) {
+  @each $o in top right bottom left {
+    $i: index($args, $o);
+    @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number
+    {
+      #{$o}: nth($args, $i + 1);
+    }
+  }
+  position: $position;
+}
+
+// Positioning helpers
+@mixin absolute($args: '') {
+  @include position(absolute, $args);
+}
+
+@mixin fixed($args: '') {
+  @include position(fixed, $args);
+}
+
+@mixin relative($args: '') {
+  @include position(relative, $args);
+}
