@@ -1,0 +1,44 @@
+.layout__header {
+  display: flex;
+  align-items: center;
+
+  height: calc-to-rem(80);
+  padding: 0 calc-to-rem(32);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+
+  .logo {
+    width: calc-to-rem(120);
+    margin-right: calc-to-rem(60);
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .feature {
+    display: flex;
+    width: 25%;
+
+    &-item {
+      cursor: pointer;
+      margin-right: calc-to-rem(24);
+      transition: all 0.2s;
+
+      @include text(var(--black), calc-tor-rem(20), $font-family-main);
+
+      &:hover {
+        @include text(var(--primary), calc-tor-rem(20), $font-family-bold);
+      }
+    }
+
+    &-item:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .personal {
+    width: 60%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

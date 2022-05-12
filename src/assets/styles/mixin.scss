@@ -59,6 +59,12 @@
   position: $position;
 }
 
+@mixin text($color, $fontSize, $fontWeight) {
+  color: $color;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+}
+
 // Positioning helpers
 @mixin absolute($args: '') {
   @include position(absolute, $args);
