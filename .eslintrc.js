@@ -1,21 +1,28 @@
+/* eslint-disable no-undef */
 module.exports = {
-  parser: '@babel/eslint-parser',
-  extends: ['prettier'],
-  plugins: ['prettier', 'react'],
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:prettier/recommended',
+  ],
   parserOptions: {
-    ecmaVersion: 7,
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  requireConfigFile: false,
-  // 'eslint.workingDirectories': [{ mode: 'auto' }],
+  plugins: ['react', 'react-hooks'],
   rules: {
-    'no-console': 'off',
-    // 'prettier/prettier': ['error'],
+    'react-hooks/exhaustive-deps': 0,
     'react/jsx-props-no-spreading': 0,
-    'react/jsx-filename-extension': 0,
     'jsx-a11y/anchor-is-valid': 0,
     'consistent-return': 0,
-    'react/prop-types': ['error'],
+    'react/prop-types': 2,
     'react/destructuring-assignment': 0,
     'react/jsx-one-expression-per-line': 0,
     'jsx-a11y/click-events-have-key-events': 0,
@@ -33,5 +40,16 @@ module.exports = {
     'react/jsx-curly-newline': 0,
     'import/no-cycle': 0,
     'arrow-body-style': 0,
+    'import/newline-after-import': 0,
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/display-name': 0,
+    'react/jsx-key': 1,
+    'react/react-in-jsx-scope': 'off',
+    'prettier/prettier': [
+      2,
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 };
