@@ -14,9 +14,9 @@ const Button = ({ children, ...rest }) => {
 export default Button;
 
 Button.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
 };
 
 Button.defaultProps = {
-  children: <div />,
+  children: '',
 };
