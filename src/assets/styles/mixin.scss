@@ -59,10 +59,10 @@
   position: $position;
 }
 
-@mixin text($color, $fontSize, $fontWeight) {
+@mixin text($color, $fontSize, $fontFamily) {
   color: $color;
   font-size: $fontSize;
-  font-weight: $fontWeight;
+  font-family: $fontFamily;
 }
 
 // Positioning helpers

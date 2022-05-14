@@ -2,7 +2,6 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import routes from './core/routes';
-console.log({ routes });
 
 const App = () => {
   return (

@@ -1,4 +1,7 @@
-$font-family-main: 'Montserrat', sans-serif;
-$font-family-bold: 'Montserrat bold', sans-serif;
-$font-family-regular: 'Montserrat regular', sans-serif;
-$font-family-semibold: 'Montserrat semibold', sans-serif;
+:root {
+  --font-family-main: 'Montserrat', sans-serif;
+  --font-family-bold: 'Montserrat bold', sans-serif;
+  --font-family-regular: 'Montserrat regular', sans-serif;
+  --font-family-semibold: 'Montserrat semibold', sans-serif;
+  --font-family-black: 'Montserrat black', sans-serif;
+}

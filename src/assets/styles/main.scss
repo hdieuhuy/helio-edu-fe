@@ -3,7 +3,9 @@
 @import './mixin.scss';
 @import './fonts.scss';
 @import './utils.scss';
-@import './components.scss';
+
+@import 'src/modules/index.scss';
+@import 'src/components/index.scss';
 
 @import '~antd/dist/antd.css';
 
@@ -97,7 +99,7 @@ video {
 
 body {
   line-height: 1;
-  font-family: $font-family-main !important;
+  font-family: var(--font-family-main) !important;
 }
 
 p {
