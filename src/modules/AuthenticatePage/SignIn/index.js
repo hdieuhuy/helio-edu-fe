@@ -13,7 +13,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="hl-module-signin">
+    <div className="hl-ml-signin">
       <div className="container">
         <div className="left">
           <img src={SignInBg} alt="" />

@@ -13,7 +13,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="hl-module-signup">
+    <div className="hl-ml-signup">
       <div className="container">
         <div className="left">
           <img src={SignUpBg} alt="" />
@@ -27,7 +27,7 @@ const SignUp = () => {
           <div className="form-login">
             <Form
               form={form}
-              name="login"
+              name="register"
               layout="vertical"
               onFinish={onFinish}
             >
@@ -81,7 +81,7 @@ const SignUp = () => {
                   }),
                 ]}
               >
-                <Input.Password placeholder="Nhập mật khẩu" />
+                <Input.Password placeholder="Nhập xác nhận mật khẩu" />
               </Form.Item>
 
               <Form.Item>

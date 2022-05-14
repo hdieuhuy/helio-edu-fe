@@ -2,13 +2,13 @@
   display: flex;
   align-items: center;
 
-  height: calc-to-rem(80);
-  padding: 0 calc-to-rem(32);
+  height: 80px;
+  padding: 0 32px;
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
 
   .logo {
-    width: calc-to-rem(120);
-    margin-right: calc-to-rem(60);
+    width: 120px;
+    margin-right: 60px;
 
     img {
       width: 100%;
@@ -17,21 +17,19 @@
 
   .feature {
     display: flex;
-    width: 25%;
+    width: 35%;
 
     &-item {
       cursor: pointer;
       margin-right: calc-to-rem(24);
-      transition: all 0.2s;
+      transition: all 0.25s;
 
-      @include text(var(--black), calc-tor-rem(20), var(--font-family-main));
+      @include text(var(--black), 16px, var(--font-family-main));
 
       &:hover {
-        @include text(
-          var(--primary),
-          calc-tor-rem(20),
-          var(--font-family-bold)
-        );
+        transition: all 0.25s;
+
+        @include text(var(--primary), 16px, var(--font-family-main));
       }
     }
 
