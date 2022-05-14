@@ -1,0 +1,78 @@
+.hl-module-signup {
+  width: 100%;
+  min-height: 60vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 48px 248px;
+
+    border-radius: 8px;
+    box-shadow: 1px 1px 6px 0.5px rgba(0, 0, 0, 0.24);
+
+    .divider {
+      width: 1px;
+      background-color: var(--silver);
+      margin: 24px 0;
+
+      display: flex;
+      align-items: center;
+
+      opacity: 0.5;
+    }
+
+    .left {
+      width: 50%;
+
+      img {
+        width: 100%;
+        height: 480px;
+      }
+    }
+
+    .right {
+      width: 50%;
+      padding: 24px;
+
+      .title {
+        @include text(var(--primary), 24px, var(--font-family-bold));
+
+        margin-bottom: 24px;
+      }
+
+      .actions {
+        width: 100%;
+        display: flex;
+
+        .signup {
+          width: 65%;
+
+          @include text(var(--black-dark-2), 16px, var(--font-family-main));
+
+          span {
+            margin-left: 4px;
+            cursor: pointer;
+            @include text(var(--primary), 16px, var(--font-family-semibold));
+          }
+        }
+
+        .forgot {
+          width: 35%;
+          cursor: pointer;
+
+          display: flex;
+          justify-content: flex-end;
+
+          span {
+            @include text(var(--black-dark-2), 16px, var(--font-family-main));
+          }
+        }
+      }
+    }
+  }
+}
