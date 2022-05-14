@@ -4,6 +4,8 @@ import HomePage from 'src/modules/HomePage';
 import SignIn from 'src/modules/AuthenticatePage/SignIn';
 import SignUp from 'src/modules/AuthenticatePage/SignUp';
 import ForgotPassword from 'src/modules/AuthenticatePage/ForgotPassword';
+import NotFound from 'src/modules/NotFoundPage';
+import Verification from 'src/modules/AuthenticatePage/Verification';
 
 const routes = [
   {
@@ -22,6 +24,14 @@ const routes = [
   {
     path: '/forgot',
     element: <ForgotPassword />,
+  },
+  {
+    path: '/verify/:verifyCode',
+    element: <Verification />,
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ];
 

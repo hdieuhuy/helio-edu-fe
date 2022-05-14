@@ -1,0 +1,23 @@
+.hl-ml-verification {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 24px 0;
+
+  img {
+    width: 480px;
+    margin-bottom: 20px;
+  }
+
+  &.verify-false {
+    .title {
+      @include text(var(--cinnabar-color), 28px, var(--font-family-semibold));
+    }
+  }
+
+  .title {
+    @include text(var(--primary), 28px, var(--font-family-semibold));
+  }
+}

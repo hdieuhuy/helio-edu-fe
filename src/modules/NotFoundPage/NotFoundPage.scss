@@ -1,0 +1,26 @@
+.hl-ml-not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 48px 0;
+
+  .title {
+    text-transform: uppercase;
+    @include text(var(--black-dark-2), 56px, var(--font-family-bold));
+  }
+
+  .desc {
+    @include text(var(--black-dark-2), 30px, var(--font-family-main));
+    margin: 16px 0;
+  }
+
+  .image {
+    width: 600px;
+
+    img {
+      width: 100%;
+    }
+  }
+}
