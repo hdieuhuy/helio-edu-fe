@@ -1,10 +1,15 @@
 .layout__header {
   display: flex;
   align-items: center;
+  background-color: var(--white);
 
   height: 80px;
   padding: 0 56px;
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+
+  top: 0;
+  z-index: 10;
+  position: sticky;
 
   .logo {
     width: 120px;
@@ -42,6 +47,10 @@
     width: 60%;
     display: flex;
     justify-content: flex-end;
+
+    .ant-btn {
+      height: 40px;
+    }
   }
 
   &--onlylogo {
