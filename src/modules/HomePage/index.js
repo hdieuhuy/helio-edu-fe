@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-import { Form, Input } from 'antd';
+import { Form, Input, notification } from 'antd';
 import { Button, AnimationImage } from 'src/components';
+
+import { sendContact } from 'src/core/api/contact';
 
 import HeaderBg from 'src/assets/images/bg_home.svg';
 import AreaBg from 'src/assets/images/area-second-bg.svg';
@@ -22,8 +24,18 @@ const HomePage = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const onFinish = (values) => {
-    console.log({ values });
+  const onFinish = async (values) => {
+    const res = await sendContact(values);
+
+    if (res.data.status === 'OK') {
+      return notification.success({
+        message: res.data.message,
+      });
+    }
+
+    return notification.error({
+      message: res.data.message,
+    });
   };
 
   return (
