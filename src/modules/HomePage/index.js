@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-import { Form, Input, notification } from 'antd';
+import { Form, Input } from 'antd';
 import { Button, AnimationImage } from 'src/components';
+import { toast } from 'react-toastify';
 
 import { sendContact } from 'src/core/api/contact';
 
@@ -28,14 +29,10 @@ const HomePage = () => {
     const res = await sendContact(values);
 
     if (res.data.status === 'OK') {
-      return notification.success({
-        message: res.data.message,
-      });
+      return toast.success(res.data.message);
     }
 
-    return notification.error({
-      message: res.data.message,
-    });
+    return toast.error(res.data.message);
   };
 
   return (

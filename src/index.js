@@ -3,12 +3,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+import { ToastContainer } from 'react-toastify';
+
 import App from './App';
 import DefaultLayout from './components/Layout';
 import reportWebVitals from './reportWebVitals';
 
 import './assets/fonts/index.scss';
 import './assets/styles/main.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +19,8 @@ root.render(
     <Router>
       <DefaultLayout>
         <App />
+
+        <ToastContainer autoClose={2500} />
       </DefaultLayout>
     </Router>
   </React.StrictMode>
