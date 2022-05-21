@@ -2,14 +2,26 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import { Button } from 'src/components';
 import { Link } from 'react-router-dom';
+import { signUp } from 'src/core/api/students';
+
+import { toast } from 'react-toastify';
 
 import SignUpBg from 'src/assets/images/sign-up-bg.svg';
 
 const SignUp = () => {
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log({ values });
+  const onFinish = async (values) => {
+    const res = await signUp({
+      email: values?.email,
+      password: values?.password,
+    });
+
+    if (res.data.status === 'OK') {
+      return toast.success(res.data.message);
+    }
+
+    return toast.error(res.data.message);
   };
 
   return (

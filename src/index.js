@@ -20,7 +20,7 @@ root.render(
       <DefaultLayout>
         <App />
 
-        <ToastContainer autoClose={2500} />
+        <ToastContainer hideProgressBar autoClose={2500} theme="colored" />
       </DefaultLayout>
     </Router>
   </React.StrictMode>
