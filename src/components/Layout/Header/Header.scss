@@ -31,6 +31,14 @@
 
       @include text(var(--black), 16px, var(--font-family-main));
 
+      &.active {
+        @include text(var(--primary), 16px, var(--font-family-semibold));
+
+        &:hover {
+          @include text(var(--primary), 16px, var(--font-family-semibold));
+        }
+      }
+
       &:hover {
         transition: all 0.25s;
 

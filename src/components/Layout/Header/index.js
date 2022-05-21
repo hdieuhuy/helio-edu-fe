@@ -1,7 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
+import classNames from 'classnames';
 
 import { Menu, Dropdown } from 'antd';
 import Logo from 'src/assets/images/logo.png';
@@ -31,7 +32,25 @@ const MenuItemWrapper = styled.div`
 
 const Header = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const isSinglePage = useCheckPathName();
+
+  const listFeature = [
+    {
+      name: 'Tìm gia sư',
+      pathname: '/teachers',
+      onClick: () => {
+        navigate('/teachers');
+      },
+    },
+    {
+      name: 'Đăng ký gia sư',
+      pathname: '/signup/teacher',
+      onClick: () => {
+        navigate('/signup/teacher');
+      },
+    },
+  ];
 
   const menu = (
     <Menu
@@ -89,6 +108,22 @@ const Header = () => {
     </div>
   );
 
+  const renderFeatures = (
+    <div className="feature">
+      {listFeature.map((item, index) => (
+        <div
+          className={classNames('feature-item', {
+            active: pathname === item.pathname,
+          })}
+          key={`feature-item-${index}`}
+          onClick={item.onClick}
+        >
+          {item.name}
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <div className="layout__header">
       <div className="logo">
@@ -97,11 +132,7 @@ const Header = () => {
         </Link>
       </div>
 
-      <div className="feature">
-        <div className="feature-item">Tìm gia sư</div>
-        <div className="feature-item">Đăng ký gia sư</div>
-        <div className="feature-item">Đăng ký gia sư</div>
-      </div>
+      {renderFeatures}
 
       {renderPersonal}
     </div>
