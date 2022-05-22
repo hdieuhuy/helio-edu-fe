@@ -1,0 +1,16 @@
+@import './CardInformation/CardInformation.scss';
+
+.hl-ml-teachers {
+  min-height: 100vh;
+  padding: 48px 180px;
+
+  .header {
+    margin-bottom: 24px;
+  }
+
+  .container {
+    .hl-ml-card-information {
+      margin-bottom: 16px;
+    }
+  }
+}

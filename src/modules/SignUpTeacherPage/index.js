@@ -4,6 +4,7 @@ import { Button } from 'src/components';
 import { registerTeacher } from 'src/core/api/teachers';
 
 import { toast } from 'react-toastify';
+import { formatPrice } from 'src/utils';
 
 const { Option } = Select;
 
@@ -167,15 +168,29 @@ const SignUpTeacherPage = () => {
             </Form.Item>
 
             <Form.Item
+              label="Tốt nghiệp tại"
+              name="graduate"
+              rules={[
+                { required: true, message: 'Tốt nghiệp không được rỗng' },
+              ]}
+            >
+              <Input placeholder="Nhập tốt nghiệp" />
+            </Form.Item>
+
+            <Form.Item
               label="Học phí mối giờ"
               name="priceRent"
-              rules={[{ required: true, message: 'Tối thiểu là 50.000 VND' }]}
+              rules={[
+                {
+                  required: true,
+                  message: 'Tối thiểu là 50.000 VND',
+                  min: 50000,
+                },
+              ]}
             >
               <InputNumber
                 style={{ width: '100%' }}
-                formatter={(value) =>
-                  `VND ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                }
+                formatter={(value) => formatPrice(value)}
                 parser={(value) => value.replace(/VND\s?|(,*)/g, '')}
               />
             </Form.Item>

@@ -1,0 +1,110 @@
+.hl-ml-card-information {
+  width: 100%;
+  display: flex;
+
+  padding: 24px;
+
+  border-radius: 8px;
+  box-shadow: 1px 1px 6px 0.5px rgba(0, 0, 0, 0.1);
+
+  .general {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .avatar {
+      margin-bottom: 20px;
+
+      img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+
+    .work {
+      margin-bottom: 24px;
+      @include text(var(--black-dark-3), 16px, var(--font-family-main));
+    }
+
+    .price {
+      @include text(var(--black-dark-3), 16px, var(--font-family-semibold));
+    }
+  }
+
+  .main {
+    width: 40%;
+    margin-left: 8px;
+    border-right: 1px solid var(--black-dark-1);
+
+    .full-name {
+      margin-bottom: 16px;
+      text-transform: uppercase;
+
+      @include text(var(--primary), 20px, var(--font-family-bold));
+    }
+
+    .graduate {
+      @include text(var(--black-dark-2), 14px, var(--font-family-main));
+    }
+
+    .divider {
+      height: 2px;
+      width: 40px;
+
+      margin: 16px 0;
+
+      background: var(--primary);
+    }
+
+    .subjects {
+      .label {
+        margin-bottom: 16px;
+        text-transform: uppercase;
+
+        @include text(var(--black-premium), 14px, var(--font-family-main));
+      }
+
+      .subject-item {
+        .ant-tag {
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+
+  .introduce {
+    width: 40%;
+    padding: 0 20px;
+    position: relative;
+
+    .label {
+      text-align: center;
+      margin-bottom: 16px;
+
+      span {
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 4px;
+
+        @include text(var(--black-premium), 16px, var(--font-family-main));
+      }
+    }
+
+    span.text {
+      display: block;
+      line-height: 1.5;
+      padding: 20px 0;
+      word-break: break-all;
+
+      @include text(var(--black-dark-3), 14px, var(--font-family-main));
+    }
+
+    .btn {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
