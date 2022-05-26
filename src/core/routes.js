@@ -9,6 +9,7 @@ import Verification from 'src/modules/AuthenticatePage/Verification';
 
 import TeachersPage from 'src/modules/TeachersPage';
 import SignUpTeacherPage from 'src/modules/SignUpTeacherPage';
+import TeacherDetailPage from 'src/modules/TeacherDetailPage';
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
   {
     path: '/teachers',
     element: <TeachersPage />,
+  },
+  {
+    path: '/teacher/:id',
+    exact: true,
+    element: <TeacherDetailPage />,
   },
   {
     path: 'signup/teacher',
