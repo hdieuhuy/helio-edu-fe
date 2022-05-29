@@ -10,4 +10,13 @@ export const registerTeacher = (data) => {
     .catch((error) => error);
 };
 
+export const signInTeacher = (data) => {
+  return axios
+    .post(`${process.env.REACT_APP_ENDPOINT}/teacher/signin`, {
+      ...data,
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 export default {};

@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
 import classNames from 'classnames';
+import isEmpty from 'lodash/isEmpty';
 
-import { Menu, Dropdown } from 'antd';
+import { Menu, Dropdown, Avatar } from 'antd';
 import Logo from 'src/assets/images/logo.png';
 import { Link } from 'react-router-dom';
 import Button from 'src/components/Button';
 import { Icon } from '@iconify/react';
 
 import useCheckPathName from '../useCheckPathname';
-
-const isLogin = false;
+import { clearUserProfile, getUserProfile } from 'src/utils/clientCache';
+import { toast } from 'react-toastify';
 
 const IconWrapper = styled.div`
   svg {
-    font-size: 32px;
+    font-size: 48px;
     color: var(--primary);
   }
 `;
@@ -35,6 +36,9 @@ const Header = () => {
   const { pathname } = useLocation();
   const isSinglePage = useCheckPathName();
 
+  const user = getUserProfile();
+  const isLogin = !isEmpty(user);
+
   const listFeature = [
     {
       name: 'Tìm gia sư',
@@ -52,15 +56,40 @@ const Header = () => {
     },
   ];
 
+  useEffect(() => {
+    if (!isLogin && isSinglePage) return;
+
+    navigate('/');
+  }, [isLogin, isSinglePage]);
+
+  const logOut = () => {
+    clearUserProfile();
+    toast.success('Đăng xuất thành công!');
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
+  };
+
   const menu = (
     <Menu
       items={[
+        {
+          label: (
+            <div>
+              {isEmpty(user?.profile?.lastName) &&
+              isEmpty(user?.profile?.firstName)
+                ? user?.profile?.email?.split('@')[0]
+                : `${user?.profile?.lastName} ${user?.profile?.firstName}`}
+            </div>
+          ),
+        },
         {
           label: <div>Hồ sơ cá nhân</div>,
         },
         {
           label: (
-            <div>
+            <div onClick={logOut}>
               <MenuItemWrapper>
                 <span>Đăng xuất</span>
                 <Icon icon="clarity:logout-line" />
@@ -96,9 +125,13 @@ const Header = () => {
           placement="bottomRight"
           arrow={{ pointAtCenter: true }}
         >
-          <IconWrapper>
-            <Icon icon="carbon:user-avatar-filled" />
-          </IconWrapper>
+          {isEmpty(user?.profile?.avatar) ? (
+            <IconWrapper>
+              <Icon icon="carbon:user-avatar-filled" />
+            </IconWrapper>
+          ) : (
+            <Avatar size={48} src={user?.profile?.avatar} />
+          )}
         </Dropdown>
       ) : (
         <Button type="primary" onClick={redirectToLogin}>

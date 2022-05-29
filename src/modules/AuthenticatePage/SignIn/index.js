@@ -2,14 +2,53 @@ import React from 'react';
 import { Form, Input, Radio } from 'antd';
 import { Button } from 'src/components';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import { signIn } from 'src/core/api/students';
+import { setUserProfile } from 'src/utils/clientCache';
+import { signInTeacher } from 'src/core/api/teachers';
+
+import { useNavigate } from 'react-router-dom';
 
 import SignInBg from 'src/assets/images/sign-in-bg.svg';
+import jwtDecode from 'jwt-decode';
 
 const SignIn = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
-  const onFinish = (values) => {
-    console.log({ values });
+  const onFinish = async (values) => {
+    if (values?.option === 'student') {
+      const res = await signIn({
+        email: values?.email,
+        password: values?.password,
+      });
+
+      if (res.data.status === 'OK') {
+        const user = jwtDecode(res.data.data.token);
+
+        navigate('/');
+        setUserProfile(user);
+        return toast.success(res.data.message);
+      }
+
+      return toast.error(res.data.message);
+    }
+
+    const res = await signInTeacher({
+      email: values?.email,
+      password: values?.password,
+    });
+
+    if (res.data.status === 'OK') {
+      const user = jwtDecode(res.data.data.token);
+
+      navigate('/');
+      setUserProfile(user);
+      return toast.success(res.data.message);
+    }
+
+    return toast.error(res.data.message);
   };
 
   return (

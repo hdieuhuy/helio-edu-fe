@@ -1,9 +1,38 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { Tag } from 'antd';
 import { Icon } from '@iconify/react';
+import { SocketContext } from 'src/contexts/socket';
+
+import { createClassroom } from 'src/core/api/classroom';
+import { Button } from 'src/components';
+import { addHours } from 'src/utils';
 
 const TeacherDetailPage = () => {
+  const { socket } = useContext(SocketContext);
+  const [data, setData] = useState({});
+  console.log({ data });
+
+  useEffect(() => {
+    socket.on('BE_CLASSROOM_PENDING', (res) => {
+      setData(res);
+    });
+
+    return () => socket.disconnect();
+  }, []);
+
+  // teacher
+  useEffect(() => {}, [data]);
+
+  const handleCreateClassroom = () => {
+    createClassroom({
+      teacherID: '6288fc67f66f16e695946f44',
+      studentID: '62891cdc8258bd7b19a7d625',
+      startTime: Date.now(),
+      endTime: addHours(1),
+    });
+  };
+
   return (
     <div className="hl-ml-teacher-detail">
       <div className="container">
@@ -80,7 +109,15 @@ const TeacherDetailPage = () => {
           </div>
         </div>
 
-        <div className="right-side"></div>
+        <div className="right-side">
+          <Button
+            type="primary"
+            onClick={handleCreateClassroom}
+            loading={data?.status === 'PENDING'}
+          >
+            {data?.status === 'PENDING' ? 'Đang chờ giáo viên' : 'Đăng ký học'}
+          </Button>
+        </div>
       </div>
 
       <div className="feedback"></div>

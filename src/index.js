@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import App from './App';
 import DefaultLayout from './components/Layout';
 import reportWebVitals from './reportWebVitals';
+import { SocketProvider } from 'src/contexts/socket';
 
 import './assets/fonts/index.scss';
 import './assets/styles/main.scss';
@@ -18,9 +19,10 @@ root.render(
   <React.StrictMode>
     <Router>
       <DefaultLayout>
-        <App />
-
-        <ToastContainer hideProgressBar autoClose={2500} theme="colored" />
+        <SocketProvider>
+          <App />
+          <ToastContainer hideProgressBar autoClose={2500} theme="colored" />
+        </SocketProvider>
       </DefaultLayout>
     </Router>
   </React.StrictMode>

@@ -18,7 +18,7 @@ const routes = [
     element: <HomePage />,
   },
   {
-    path: '/teachers',
+    path: '/teacher',
     element: <TeachersPage />,
   },
   {

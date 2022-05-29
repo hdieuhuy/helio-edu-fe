@@ -10,6 +10,15 @@ export const signUp = (data) => {
     .catch((error) => error);
 };
 
+export const signIn = (data) => {
+  return axios
+    .post(`${process.env.REACT_APP_ENDPOINT}/auth/signin`, {
+      ...data,
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 export const verifyAccount = (idActive) => {
   return axios
     .get(`${process.env.REACT_APP_ENDPOINT}/auth/verify/${idActive}`)
