@@ -4,5 +4,9 @@ export const config =
     ? process.env.REACT_APP_ENDPOINT
     : process.env.REACT_APP_LOCAL_ENDPOINT;
 
-console.log({ config, env: process.env.NODE_ENV });
+export const socketConfig =
+  process.env.NODE_ENV === 'production'
+    ? process.env.REACT_APP_DOMAIN_BE
+    : 'localhost:3001';
+
 export default {};

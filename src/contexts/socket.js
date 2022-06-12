@@ -2,8 +2,9 @@
 import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import socketio from 'socket.io-client';
+import { socketConfig } from 'src/core/config';
 
-const socket = socketio('localhost:3001');
+const socket = socketio(socketConfig);
 
 const SocketContext = createContext(null);
 const { Provider } = SocketContext;
