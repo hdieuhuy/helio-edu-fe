@@ -183,8 +183,6 @@ const SignUpTeacherPage = () => {
               rules={[
                 {
                   required: true,
-                  message: 'Tối thiểu là 50.000 VND',
-                  min: 50000,
                 },
               ]}
             >
