@@ -42,9 +42,9 @@ const Header = () => {
   const listFeature = [
     {
       name: 'Tìm gia sư',
-      pathname: '/teachers',
+      pathname: '/teacher',
       onClick: () => {
-        navigate('/teachers');
+        navigate('/teacher');
       },
     },
     {
@@ -57,7 +57,7 @@ const Header = () => {
   ];
 
   useEffect(() => {
-    if (!isLogin && isSinglePage) return;
+    if (!isLogin || !isSinglePage) return;
 
     navigate('/');
   }, [isLogin, isSinglePage]);

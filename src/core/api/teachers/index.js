@@ -1,9 +1,10 @@
 /* eslint-disable no-undef */
 import axios from 'axios';
+import { config } from 'src/core/config';
 
 export const registerTeacher = (data) => {
   return axios
-    .post(`${process.env.REACT_APP_ENDPOINT}/teacher/signup`, {
+    .post(`${config}/teacher/signup`, {
       ...data,
     })
     .then((res) => res)
@@ -12,7 +13,7 @@ export const registerTeacher = (data) => {
 
 export const signInTeacher = (data) => {
   return axios
-    .post(`${process.env.REACT_APP_ENDPOINT}/teacher/signin`, {
+    .post(`${config}/teacher/signin`, {
       ...data,
     })
     .then((res) => res)

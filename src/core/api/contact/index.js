@@ -1,9 +1,10 @@
 /* eslint-disable no-undef */
 import axios from 'axios';
+import { config } from 'src/core/config';
 
 export const sendContact = (data) => {
   return axios
-    .post(`${process.env.REACT_APP_ENDPOINT}/contact`, {
+    .post(`${config}/contact`, {
       ...data,
     })
     .then((res) => res)

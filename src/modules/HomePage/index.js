@@ -51,7 +51,7 @@ const HomePage = () => {
           </span>
         </div>
 
-        <Button type="primary" onClick={() => navigate('/teachers')}>
+        <Button type="primary" onClick={() => navigate('/teacher')}>
           Tìm gia sư
         </Button>
       </AreaBackgroundWrapper>

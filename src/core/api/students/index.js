@@ -1,9 +1,10 @@
 /* eslint-disable no-undef */
 import axios from 'axios';
+import { config } from 'src/core/config';
 
 export const signUp = (data) => {
   return axios
-    .post(`${process.env.REACT_APP_ENDPOINT}/auth/signup`, {
+    .post(`${config}/auth/signup`, {
       ...data,
     })
     .then((res) => res)
@@ -12,7 +13,7 @@ export const signUp = (data) => {
 
 export const signIn = (data) => {
   return axios
-    .post(`${process.env.REACT_APP_ENDPOINT}/auth/signin`, {
+    .post(`${config}/auth/signin`, {
       ...data,
     })
     .then((res) => res)
@@ -21,7 +22,7 @@ export const signIn = (data) => {
 
 export const verifyAccount = (idActive) => {
   return axios
-    .get(`${process.env.REACT_APP_ENDPOINT}/auth/verify/${idActive}`)
+    .get(`${config}/auth/verify/${idActive}`)
     .then((res) => res)
     .catch((error) => error);
 };

@@ -17,7 +17,7 @@ const CardInformation = () => {
 
         <div className="work">Sinh Viên</div>
 
-        <div className="price">{formatPrice(100000)} / 1h</div>
+        <div className="price">{formatPrice(100000)} / 1 giờ</div>
       </div>
 
       <div className="main">
