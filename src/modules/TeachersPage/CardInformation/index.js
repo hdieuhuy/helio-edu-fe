@@ -1,41 +1,52 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { useNavigate } from 'react-router-dom';
 
 import { Tag } from 'antd';
 import { formatPrice } from 'src/utils';
-import { Button } from 'src/components';
+import { Button, Avatar } from 'src/components';
 
-const CardInformation = () => {
+const CardInformation = ({ data }) => {
+  const navigate = useNavigate();
+
+  const renderSubjects = data?.profile?.subjects?.map((item, index) => (
+    <Tag color="green" key={`tag-subject-${index}`}>
+      {item}
+    </Tag>
+  ));
+
+  const goDetailTeacher = () => {
+    navigate(`/teacher/${data?._id}`);
+  };
+
   return (
     <div className="hl-ml-card-information">
       <div className="general">
         <div className="avatar">
-          <img
-            src="https://haycafe.vn/wp-content/uploads/2022/01/Avt-meo-ff-cute-qua.jpg"
-            alt=""
-          />
+          <Avatar src={data?.profile?.avatar} />
         </div>
 
-        <div className="work">Sinh Viên</div>
+        <div className="work">{data?.profile?.work}</div>
 
-        <div className="price">{formatPrice(100000)} / 1 giờ</div>
+        <div className="price">
+          {formatPrice(+data?.profile?.priceRent)} / 1 giờ
+        </div>
       </div>
 
       <div className="main">
-        <div className="full-name">Nguyễn Ngọc Tuấn</div>
+        <div className="full-name">
+          {data?.profile?.firstName} {data?.profile?.lastName}
+        </div>
 
-        <div className="graduate">Tốt nghiệp Đại học Bách Khoa</div>
+        <div className="graduate">{data?.profile?.graduate}</div>
 
         <div className="divider" />
 
         <div className="subjects">
           <div className="label">Môn dạy</div>
 
-          <div className="subject-item">
-            <Tag color="green">Toán</Tag>
-            <Tag color="green">Văn Học</Tag>
-            <Tag color="green">Hoá Học</Tag>
-            <Tag color="green">Hoá Học</Tag>
-          </div>
+          <div className="subject-item">{renderSubjects}</div>
         </div>
       </div>
 
@@ -44,16 +55,12 @@ const CardInformation = () => {
           <span>Giới thiệu</span>
         </div>
 
-        <span className="text">
-          Kinh nghiệm: Đã từng làm trợ giảng, tutor, private tutor, teacher tại
-          trung tâm Bambi English, NewYork Spring Board hơn 1 năm. Làm tutor ôn
-          thi chứng chỉ Cambridge cho các bé Starters Movers Flyers KET (hiện
-          tại đang ôn 2 bé Movers, 1 bé Flyers, 1 bé KET)…. Dạy chương trình
-          sách giáo khoa, anh văn giao tiếp cho 2 chị chuẩn bị đi Úc.
-        </span>
+        <span className="text">{data?.profile?.introduce}</span>
 
         <div className="btn">
-          <Button type="primary">Xem chi tiết</Button>
+          <Button type="primary" onClick={goDetailTeacher}>
+            Xem chi tiết
+          </Button>
         </div>
       </div>
     </div>
@@ -61,3 +68,11 @@ const CardInformation = () => {
 };
 
 export default CardInformation;
+
+CardInformation.propTypes = {
+  data: PropTypes.array,
+};
+
+CardInformation.defaultProps = {
+  data: [],
+};

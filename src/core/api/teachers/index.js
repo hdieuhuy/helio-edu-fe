@@ -20,4 +20,18 @@ export const signInTeacher = (data) => {
     .catch((error) => error);
 };
 
+export const getListTeacher = () => {
+  return axios
+    .get(`${config}/teacher`)
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+export const getDetailTeacher = (id) => {
+  return axios
+    .get(`${config}/teacher/${id}`)
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 export default {};

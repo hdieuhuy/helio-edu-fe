@@ -11,4 +11,22 @@ export const createClassroom = (data) => {
     .catch((error) => error);
 };
 
+export const actionTeacher = (data) => {
+  return axios
+    .post(`${config}/classroom/wait`, {
+      ...data,
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+export const finishTeach = (id) => {
+  return axios
+    .post(`${config}/classroom/done`, {
+      id,
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 export default {};

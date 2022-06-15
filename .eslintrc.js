@@ -24,6 +24,7 @@ module.exports = {
     'consistent-return': 0,
     'no-constant-condition': 1,
     'react/prop-types': 2,
+    'no-unsafe-optional-chaining': 0,
     'react/destructuring-assignment': 0,
     'react/jsx-one-expression-per-line': 0,
     'jsx-a11y/click-events-have-key-events': 0,

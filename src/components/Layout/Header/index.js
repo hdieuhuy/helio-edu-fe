@@ -5,22 +5,15 @@ import styled from 'styled-components';
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
-import { Menu, Dropdown, Avatar } from 'antd';
+import { Menu, Dropdown } from 'antd';
 import Logo from 'src/assets/images/logo.png';
 import { Link } from 'react-router-dom';
-import Button from 'src/components/Button';
 import { Icon } from '@iconify/react';
+import { Avatar, Button } from 'src/components';
 
 import useCheckPathName from '../useCheckPathname';
 import { clearUserProfile, getUserProfile } from 'src/utils/clientCache';
 import { toast } from 'react-toastify';
-
-const IconWrapper = styled.div`
-  svg {
-    font-size: 48px;
-    color: var(--primary);
-  }
-`;
 
 const MenuItemWrapper = styled.div`
   display: flex;
@@ -125,13 +118,9 @@ const Header = () => {
           placement="bottomRight"
           arrow={{ pointAtCenter: true }}
         >
-          {isEmpty(user?.profile?.avatar) ? (
-            <IconWrapper>
-              <Icon icon="carbon:user-avatar-filled" />
-            </IconWrapper>
-          ) : (
-            <Avatar size={48} src={user?.profile?.avatar} />
-          )}
+          <div>
+            <Avatar src={user?.profile?.avatar} />
+          </div>
         </Dropdown>
       ) : (
         <Button type="primary" onClick={redirectToLogin}>

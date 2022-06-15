@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Form, Input, InputNumber, Select } from 'antd';
+import { DatePicker, Divider, Form, Input, InputNumber, Select } from 'antd';
 import { Button } from 'src/components';
 import { registerTeacher } from 'src/core/api/teachers';
 
@@ -117,17 +117,31 @@ const SignUpTeacherPage = () => {
               <Input placeholder="Nhập email" />
             </Form.Item>
 
-            <Form.Item
-              label="Giới tính"
-              name="gender"
-              initialValue="MALE"
-              rules={[{ required: true }]}
-            >
-              <Select style={{ width: '100%' }}>
-                <Option value="MALE">Nam</Option>
-                <Option value="FEMALE">Nữ</Option>
-              </Select>
-            </Form.Item>
+            <div style={{ display: 'flex' }}>
+              <Form.Item
+                label="Giới tính"
+                name="gender"
+                initialValue="MALE"
+                rules={[{ required: true }]}
+                style={{ width: '50%', marginRight: 12 }}
+              >
+                <Select style={{ width: '100%' }}>
+                  <Option value="MALE">Nam</Option>
+                  <Option value="FEMALE">Nữ</Option>
+                </Select>
+              </Form.Item>
+
+              <Form.Item
+                label="Ngày sinh"
+                name="birthday"
+                rules={[
+                  { required: true, message: 'Giá thuê không được rỗng' },
+                ]}
+                style={{ width: '50%' }}
+              >
+                <DatePicker placeholder="Ngày sinh" style={{ width: '100%' }} />
+              </Form.Item>
+            </div>
 
             <Form.Item
               label="Mô tả bản thân"

@@ -2,18 +2,26 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { Input, Modal, Rate, Select, Tag } from 'antd';
 import { Icon } from '@iconify/react';
+import { isEmpty, isNull } from 'lodash';
 import { SocketContext } from 'src/contexts/socket';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { createClassroom } from 'src/core/api/classroom';
-import { Button } from 'src/components';
+import { getDetailTeacher } from 'src/core/api/teachers';
+import { feedbackForTeacher } from 'src/core/api/students';
+
+import { Avatar, Button } from 'src/components';
 import { addHours, formatPrice } from 'src/utils';
-import { toast } from 'react-toastify';
 import { getUserProfile } from 'src/utils/clientCache';
 
 const TeacherDetailPage = () => {
   const { socket } = useContext(SocketContext);
+  const { id } = useParams();
 
   const [data, setData] = useState({});
+  const [teacherInfo, setTeacherInfo] = useState({});
+
   const [hour, setHour] = useState(1);
   const [isModalFeedback, setModalFeedback] = useState(false);
 
@@ -23,6 +31,17 @@ const TeacherDetailPage = () => {
   const user = getUserProfile();
 
   const isCurrentStudent = user?._id === data?.student?._id;
+
+  useEffect(() => {
+    if (isEmpty(id)) return;
+    const getDetail = async () => {
+      const res = await getDetailTeacher(id);
+
+      setTeacherInfo(res?.data?.data?.teacher);
+    };
+
+    getDetail();
+  }, [id]);
 
   useEffect(() => {
     socket.on('BE_CLASSROOM_PENDING', (res) => {
@@ -55,17 +74,47 @@ const TeacherDetailPage = () => {
   }, [data]);
 
   const handleCreateClassroom = () => {
+    if (user?.profile?.money < teacherInfo?.profile?.priceRent)
+      return toast.error('Số tiền không đủ để thuê');
+
     createClassroom({
-      teacherID: '6288fc67f66f16e695946f44',
-      studentID: '62891cdc8258bd7b19a7d625',
+      teacherID: teacherInfo?._id,
+      studentID: user?._id,
       startTime: new Date(),
       endTime: addHours(hour),
     });
   };
 
-  const handleFeedbackTeacher = () => {
-    console.log({ content, rate });
+  const handleFeedbackTeacher = async () => {
+    const res = await feedbackForTeacher({
+      studentID: user?._id,
+      teacherID: teacherInfo?._id,
+      content,
+      rate,
+    });
+
+    if (res.data.status === 'OK') {
+      return toast.success(res.data.message);
+    }
+
+    return toast.error(res.data.message);
   };
+
+  const renderSubjects = teacherInfo?.profile?.subjects?.map((item, index) => (
+    <Tag color="green" key={`tag-subject-${index}`}>
+      {item}
+    </Tag>
+  ));
+
+  const renderAgeTeacher = () => {
+    if (isNull(teacherInfo?.profile?.birthday)) return <div />;
+
+    return (
+      new Date().getFullYear() - +teacherInfo?.profile?.birthday?.split('/')[2]
+    );
+  };
+
+  const renderGender = teacherInfo?.profile?.gender === 'MALE' ? 'Nam' : 'Nữ';
 
   return (
     <div className="hl-ml-teacher-detail">
@@ -73,28 +122,23 @@ const TeacherDetailPage = () => {
         <div className="left-side">
           <div className="box-info">
             <div className="avatar">
-              <img
-                src="https://haycafe.vn/wp-content/uploads/2022/01/Avt-meo-ff-cute-qua.jpg"
-                alt=""
-              />
+              <Avatar src={teacherInfo?.profile?.avatar} />
 
-              <div className="work">Sinh Viên</div>
+              <div className="work">{teacherInfo?.profile?.work}</div>
             </div>
 
             <div className="main">
-              <div className="full-name">Nguyễn Ngọc Tuấn</div>
+              <div className="full-name">
+                {teacherInfo?.profile?.firstName}
+                {teacherInfo.profile?.lastName}
+              </div>
 
-              <div className="graduate">Tốt nghiệp Đại học Bách Khoa</div>
+              <div className="graduate">{teacherInfo?.profile?.graduate}</div>
 
               <div className="subjects">
                 <div className="label">Môn dạy</div>
 
-                <div className="subject-item">
-                  <Tag color="green">Toán</Tag>
-                  <Tag color="green">Văn Học</Tag>
-                  <Tag color="green">Hoá Học</Tag>
-                  <Tag color="green">Hoá Học</Tag>
-                </div>
+                <div className="subject-item">{renderSubjects}</div>
               </div>
             </div>
           </div>
@@ -103,15 +147,11 @@ const TeacherDetailPage = () => {
             <div className="label">Hồ sơ cá nhân</div>
 
             <div className="information">
-              <div className="info-item">Tuổi - 34</div>
+              <div className="info-item">Tuổi - {renderAgeTeacher()}</div>
 
-              <div className="info-item">Giới tính - Nam</div>
+              <div className="info-item">Giới tính - {renderGender}</div>
 
-              <div className="introduce">
-                Có nhiều năm kinh nghiệm dạy 1 kèm 1 online, giúp học sinh đạt
-                điểm cao môn Toán và Lý. Chuyên luyện thi Khối A môn Toán và Lý
-                vào các trường Top điểm đầu vào cao
-              </div>
+              <div className="introduce">{teacherInfo?.profile?.introduce}</div>
             </div>
           </div>
 
@@ -147,7 +187,9 @@ const TeacherDetailPage = () => {
           <div className="action">
             <div className="label">Thuê gia sư</div>
 
-            <div className="price">Học phí: {formatPrice(100000)} / 1 giờ</div>
+            <div className="price">
+              Học phí: {formatPrice(+teacherInfo?.profile?.priceRent)} / 1 giờ
+            </div>
 
             <Select
               defaultValue="1 giờ"
@@ -162,15 +204,15 @@ const TeacherDetailPage = () => {
             <Button
               type="primary"
               onClick={handleCreateClassroom}
-              disabled={data?.status && isCurrentStudent === 'ACTIVE'}
-              loading={data?.status && isCurrentStudent === 'PENDING'}
+              disabled={data?.status === 'ACTIVE' && isCurrentStudent}
+              loading={data?.status === 'PENDING' && isCurrentStudent}
             >
-              {data?.status && isCurrentStudent === 'PENDING'
+              {data?.status === 'PENDING' && isCurrentStudent
                 ? 'Đang chờ giáo viên'
                 : 'Đăng ký học'}
             </Button>
 
-            {data?.status && isCurrentStudent === 'ACTIVE' && (
+            {data?.status === 'ACTIVE' && isCurrentStudent && (
               <a href={data?.linkRoom} target="_blank" className="linkzoom">
                 <Icon icon="akar-icons:zoom-fill" color="#2d8cff" />
                 Click để tham gia lớp học

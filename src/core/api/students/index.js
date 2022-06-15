@@ -27,4 +27,13 @@ export const verifyAccount = (idActive) => {
     .catch((error) => error);
 };
 
+export const feedbackForTeacher = (data) => {
+  return axios
+    .post(`${config}/feedback`, {
+      ...data,
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 export default {};
