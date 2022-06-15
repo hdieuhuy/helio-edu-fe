@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -14,6 +14,9 @@ import { Avatar, Button } from 'src/components';
 import useCheckPathName from '../useCheckPathname';
 import { clearUserProfile, getUserProfile } from 'src/utils/clientCache';
 import { toast } from 'react-toastify';
+import { formatPrice } from 'src/utils';
+
+import { HeaderContext } from 'src/contexts/header';
 
 const MenuItemWrapper = styled.div`
   display: flex;
@@ -28,6 +31,8 @@ const Header = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const isSinglePage = useCheckPathName();
+
+  const { headerRefresh } = useContext(HeaderContext);
 
   const user = getUserProfile();
   const isLogin = !isEmpty(user);
@@ -60,38 +65,48 @@ const Header = () => {
     toast.success('Đăng xuất thành công!');
 
     setTimeout(() => {
+      navigate('/');
       window.location.reload();
-    }, 1500);
+    }, 500);
   };
 
-  const menu = (
-    <Menu
-      items={[
-        {
-          label: (
-            <div>
-              {isEmpty(user?.profile?.lastName) &&
-              isEmpty(user?.profile?.firstName)
-                ? user?.profile?.email?.split('@')[0]
-                : `${user?.profile?.lastName} ${user?.profile?.firstName}`}
-            </div>
-          ),
-        },
-        {
-          label: <div>Hồ sơ cá nhân</div>,
-        },
-        {
-          label: (
-            <div onClick={logOut}>
-              <MenuItemWrapper>
-                <span>Đăng xuất</span>
-                <Icon icon="clarity:logout-line" />
-              </MenuItemWrapper>
-            </div>
-          ),
-        },
-      ]}
-    />
+  const goToProfile = () => {
+    navigate('/profile');
+  };
+
+  const menu = useMemo(
+    () => (
+      <Menu
+        items={[
+          {
+            label: (
+              <div>
+                {isEmpty(user?.profile?.lastName) &&
+                isEmpty(user?.profile?.firstName)
+                  ? user?.profile?.email?.split('@')[0]
+                  : `${user?.profile?.lastName} ${user?.profile?.firstName}`}
+                <span style={{ padding: '0 4px' }}>-</span>
+                <span>{formatPrice(user?.profile?.money)}</span>
+              </div>
+            ),
+          },
+          {
+            label: <div onClick={goToProfile}>Hồ sơ cá nhân</div>,
+          },
+          {
+            label: (
+              <div onClick={logOut}>
+                <MenuItemWrapper>
+                  <span>Đăng xuất</span>
+                  <Icon icon="clarity:logout-line" />
+                </MenuItemWrapper>
+              </div>
+            ),
+          },
+        ]}
+      />
+    ),
+    [headerRefresh, user]
   );
 
   const redirectToLogin = () => {

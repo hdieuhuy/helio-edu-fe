@@ -21,7 +21,7 @@ root.render(
       <DefaultLayout>
         <SocketProvider>
           <App />
-          <ToastContainer hideProgressBar autoClose={2500} theme="colored" />
+          <ToastContainer hideProgressBar autoClose={1500} theme="colored" />
         </SocketProvider>
       </DefaultLayout>
     </Router>

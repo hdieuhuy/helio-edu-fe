@@ -24,7 +24,7 @@ export default AnimationImage;
 
 AnimationImage.propTypes = {
   animationData: PropTypes.any.isRequired,
-  width: PropTypes.any.isRequired,
+  width: PropTypes.any,
   height: PropTypes.any.isRequired,
   style: PropTypes.object,
 };

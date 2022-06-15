@@ -13,7 +13,7 @@ const IconWrapper = styled.div`
   }
 `;
 
-const Avatar = ({ src }) => {
+const Avatar = ({ src, ...rest }) => {
   if (isEmpty(src))
     return (
       <IconWrapper>
@@ -21,11 +21,12 @@ const Avatar = ({ src }) => {
       </IconWrapper>
     );
 
-  return <AntdAvatar size={48} src={src} />;
+  return <AntdAvatar size={48} src={src} {...rest} />;
 };
 
 export default Avatar;
 
 Avatar.propTypes = {
   src: PropTypes.string.isRequired,
+  rest: PropTypes.object,
 };

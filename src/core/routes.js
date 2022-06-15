@@ -10,6 +10,7 @@ import Verification from 'src/modules/AuthenticatePage/Verification';
 import TeachersPage from 'src/modules/TeachersPage';
 import SignUpTeacherPage from 'src/modules/SignUpTeacherPage';
 import TeacherDetailPage from 'src/modules/TeacherDetailPage';
+import ProfilePage from 'src/modules/ProfilePage';
 
 const routes = [
   {
@@ -45,6 +46,10 @@ const routes = [
   {
     path: '/verify/:verifyCode',
     element: <Verification />,
+  },
+  {
+    path: '/profile',
+    element: <ProfilePage />,
   },
   {
     path: '*',
