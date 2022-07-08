@@ -27,16 +27,7 @@
           align-items: center;
 
           margin-right: 36px;
-
-          img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-
-            border-radius: 50%;
-
-            margin-bottom: 16px;
-          }
+          margin-bottom: 16px;
 
           .work {
             @include text(

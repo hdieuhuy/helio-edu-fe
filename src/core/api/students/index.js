@@ -67,4 +67,11 @@ export const updateStudentProfile = (data) => {
     .catch((error) => error);
 };
 
+export const getListStudent = () => {
+  return axios
+    .get(`${config}/auth`)
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 export default {};

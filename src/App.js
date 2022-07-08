@@ -48,9 +48,9 @@ const App = () => {
   const renderInfoStudent = () => {
     const firstName = data?.student?.profile?.firstName;
     const lastName = data?.student?.profile?.lastName;
-    const email = data?.student?.profile?.email;
+    const email = data?.student?.email;
 
-    if (isEmpty(firstName) || isEmpty(lastName)) return email;
+    if (isEmpty(firstName) || isEmpty(lastName)) return <b>{email}</b>;
 
     return `${firstName} ${lastName}`;
   };
@@ -64,8 +64,15 @@ const App = () => {
     }
   };
 
-  const handleFinishTeach = () => {
-    finishTeach(data?.classroom?.id);
+  console.log({ data });
+
+  const handleFinishTeach = async () => {
+    const res = await finishTeach(data?.classroom?._id);
+
+    if (res?.data?.status === 'OK') {
+      setData({});
+      setModalTeacher(false);
+    }
   };
 
   return (

@@ -29,4 +29,20 @@ export const finishTeach = (id) => {
     .catch((error) => error);
 };
 
+export const getHistoryRent = (data) => {
+  return axios
+    .get(`${config}/classroom/`, {
+      ...data,
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+export const getListClassroom = () => {
+  return axios
+    .get(`${config}/classroom/admin`)
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 export default {};

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { Input, Modal, Rate, Select, Tag } from 'antd';
 import { Icon } from '@iconify/react';
-import { isEmpty, isNull } from 'lodash';
+import { isEmpty } from 'lodash';
 import { SocketContext } from 'src/contexts/socket';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -61,6 +61,8 @@ const TeacherDetailPage = () => {
     });
   }, []);
 
+  console.log({ data });
+
   useEffect(() => {
     if (data?.status !== 'CLOSE' || !isCurrentStudent) return;
 
@@ -106,14 +108,6 @@ const TeacherDetailPage = () => {
     </Tag>
   ));
 
-  const renderAgeTeacher = () => {
-    if (isNull(teacherInfo?.profile?.birthday)) return <div />;
-
-    return (
-      new Date().getFullYear() - +teacherInfo?.profile?.birthday?.split('/')[2]
-    );
-  };
-
   const renderGender = teacherInfo?.profile?.gender === 'MALE' ? 'Nam' : 'Nữ';
 
   return (
@@ -129,7 +123,7 @@ const TeacherDetailPage = () => {
 
             <div className="main">
               <div className="full-name">
-                {teacherInfo?.profile?.firstName}
+                {teacherInfo?.profile?.firstName}{' '}
                 {teacherInfo.profile?.lastName}
               </div>
 
@@ -147,8 +141,6 @@ const TeacherDetailPage = () => {
             <div className="label">Hồ sơ cá nhân</div>
 
             <div className="information">
-              <div className="info-item">Tuổi - {renderAgeTeacher()}</div>
-
               <div className="info-item">Giới tính - {renderGender}</div>
 
               <div className="introduce">{teacherInfo?.profile?.introduce}</div>
@@ -224,6 +216,8 @@ const TeacherDetailPage = () => {
         <Modal
           title={false}
           visible={isModalFeedback}
+          okText="Đánh giá"
+          cancelText="Huỷ"
           onOk={handleFeedbackTeacher}
           onCancel={() => setModalFeedback(false)}
         >

@@ -1,9 +1,16 @@
 import React from 'react';
 import { Tabs } from 'antd';
-import { KeyOutlined, IdcardOutlined } from '@ant-design/icons';
+import {
+  KeyOutlined,
+  IdcardOutlined,
+  HistoryOutlined,
+  DollarOutlined,
+} from '@ant-design/icons';
 
 import ChangePassword from './ChangePassword';
 import FormProfile from './FormProfile';
+import HistoryRent from './HistoryRent';
+import StudentPayment from './Payment';
 
 const StudentProfile = () => {
   const { TabPane } = Tabs;
@@ -35,8 +42,28 @@ const StudentProfile = () => {
           <ChangePassword />
         </TabPane>
 
-        <TabPane tab="Tab 3" key="3">
-          Content of Tab Pane 3
+        <TabPane
+          tab={
+            <div>
+              <HistoryOutlined />
+              <span>Lịch sử thuê</span>
+            </div>
+          }
+          key="3"
+        >
+          <HistoryRent />
+        </TabPane>
+
+        <TabPane
+          tab={
+            <div>
+              <DollarOutlined />
+              <span>Cổng thanh toán</span>
+            </div>
+          }
+          key="4"
+        >
+          <StudentPayment />
         </TabPane>
       </Tabs>
     </div>

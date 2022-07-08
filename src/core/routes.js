@@ -11,6 +11,7 @@ import TeachersPage from 'src/modules/TeachersPage';
 import SignUpTeacherPage from 'src/modules/SignUpTeacherPage';
 import TeacherDetailPage from 'src/modules/TeacherDetailPage';
 import ProfilePage from 'src/modules/ProfilePage';
+import AdminPage from 'src/modules/AdminPage';
 
 const routes = [
   {
@@ -50,6 +51,10 @@ const routes = [
   {
     path: '/profile',
     element: <ProfilePage />,
+  },
+  {
+    path: '/admin',
+    element: <AdminPage />,
   },
   {
     path: '*',

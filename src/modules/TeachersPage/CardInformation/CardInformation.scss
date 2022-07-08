@@ -1,5 +1,6 @@
 .hl-ml-card-information {
   width: 100%;
+  min-height: 280px;
   display: flex;
 
   padding: 24px;
@@ -18,8 +19,6 @@
       margin-bottom: 20px;
 
       img {
-        width: 80px;
-        height: 80px;
         object-fit: cover;
         border-radius: 50%;
       }
@@ -95,9 +94,11 @@
 
     span.text {
       display: block;
-      line-height: 1.5;
-      padding: 20px 0;
-      word-break: break-all;
+      line-height: 2;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
 
       @include text(var(--black-dark-3), 14px, var(--font-family-main));
     }

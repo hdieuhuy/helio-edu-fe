@@ -25,9 +25,11 @@ const TeachersPage = () => {
       </div>
 
       <div className="container">
-        {teachers?.map((item, index) => (
-          <CardInformation data={item} key={`teacher-info-${index}`} />
-        ))}
+        {teachers
+          ?.filter((item) => item?.active)
+          ?.map((item, index) => (
+            <CardInformation data={item} key={`teacher-info-${index}`} />
+          ))}
       </div>
     </div>
   );
