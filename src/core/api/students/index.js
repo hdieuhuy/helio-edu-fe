@@ -74,4 +74,22 @@ export const getListStudent = () => {
     .catch((error) => error);
 };
 
+export const forgotPassword = (data) => {
+  return axios
+    .post(`${config}/auth/forgot`, {
+      ...data,
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+export const newPassword = (data) => {
+  return axios
+    .post(`${config}/auth/newpassword`, {
+      ...data,
+    })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 export default {};

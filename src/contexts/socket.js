@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import socketio from 'socket.io-client';
 import { socketConfig } from 'src/core/config';
 
-const socket = socketio(socketConfig);
+const socket = socketio(socketConfig, { reconnectionDelayMax: 10000 });
 
 const SocketContext = createContext(null);
 const { Provider } = SocketContext;

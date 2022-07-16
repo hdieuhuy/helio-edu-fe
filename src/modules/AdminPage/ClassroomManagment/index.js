@@ -8,13 +8,10 @@ import moment from 'moment';
 
 const ClassroomManangment = () => {
   const [classrooms, setClassrooms] = useState([]);
-  console.log({ classrooms });
 
   const data = classrooms?.filter(
     (item) => item?.email !== 'coestarvn205@gmail.com'
   );
-
-  console.log({ data });
 
   const columns = [
     {

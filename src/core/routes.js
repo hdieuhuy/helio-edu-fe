@@ -12,6 +12,7 @@ import SignUpTeacherPage from 'src/modules/SignUpTeacherPage';
 import TeacherDetailPage from 'src/modules/TeacherDetailPage';
 import ProfilePage from 'src/modules/ProfilePage';
 import AdminPage from 'src/modules/AdminPage';
+import NewPassword from 'src/modules/AuthenticatePage/NewPassword';
 
 const routes = [
   {
@@ -43,6 +44,10 @@ const routes = [
   {
     path: '/forgot',
     element: <ForgotPassword />,
+  },
+  {
+    path: '/newpassword/:id',
+    element: <NewPassword />,
   },
   {
     path: '/verify/:verifyCode',

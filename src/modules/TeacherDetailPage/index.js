@@ -7,9 +7,9 @@ import { SocketContext } from 'src/contexts/socket';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { createClassroom } from 'src/core/api/classroom';
 import { getDetailTeacher } from 'src/core/api/teachers';
 import { feedbackForTeacher } from 'src/core/api/students';
+import { createClassroom, actionTeacher } from 'src/core/api/classroom';
 
 import { Avatar, Button } from 'src/components';
 import { addHours, formatPrice } from 'src/utils';
@@ -61,8 +61,6 @@ const TeacherDetailPage = () => {
     });
   }, []);
 
-  console.log({ data });
-
   useEffect(() => {
     if (data?.status !== 'CLOSE' || !isCurrentStudent) return;
 
@@ -73,6 +71,14 @@ const TeacherDetailPage = () => {
     if (data?.status !== 'DONE' || !isCurrentStudent) return;
 
     setModalFeedback(true);
+  }, [data]);
+
+  useEffect(() => {
+    if (data?.status !== 'PENDING' || !isCurrentStudent) return;
+
+    setTimeout(() => {
+      actionTeacher({ id: data?.classroom?._id, isJoin: false });
+    }, 1000 * 60 * 3);
   }, [data]);
 
   const handleCreateClassroom = () => {

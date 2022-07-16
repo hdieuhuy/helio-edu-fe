@@ -29,11 +29,9 @@ export const finishTeach = (id) => {
     .catch((error) => error);
 };
 
-export const getHistoryRent = (data) => {
+export const getHistoryRent = ({ studentID }) => {
   return axios
-    .get(`${config}/classroom/`, {
-      ...data,
-    })
+    .get(`${config}/classroom/${studentID}`)
     .then((res) => res)
     .catch((error) => error);
 };

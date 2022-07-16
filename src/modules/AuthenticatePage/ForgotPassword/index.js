@@ -3,12 +3,21 @@ import { Form, Input } from 'antd';
 import { Button } from 'src/components';
 import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import { forgotPassword } from 'src/core/api/students';
 
 const ForgotPassword = () => {
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log({ values });
+  const onFinish = async (values) => {
+    const res = await forgotPassword(values);
+
+    if (res.data.status === 'OK') {
+      return toast.success(res.data.message);
+    }
+
+    return toast.error(res.data.message);
   };
 
   return (

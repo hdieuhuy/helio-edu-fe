@@ -64,8 +64,6 @@ const App = () => {
     }
   };
 
-  console.log({ data });
-
   const handleFinishTeach = async () => {
     const res = await finishTeach(data?.classroom?._id);
 
