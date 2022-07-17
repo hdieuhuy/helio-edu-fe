@@ -47,7 +47,18 @@ const ClassroomManangment = () => {
       dataIndex: '',
       key: '',
       render: (record) => {
-        return <Tag color="#4ecaae">{record.classroom.status}</Tag>;
+        const stateObj = {
+          DONE: 'Hoàn thành',
+          PENDING: 'Đang chờ',
+          CLOSE: 'Bị huỷ',
+          Active: 'Đang hoạt động',
+        };
+
+        return (
+          <div>
+            <Tag>{stateObj[record.classroom.status]}</Tag>
+          </div>
+        );
       },
     },
     {
