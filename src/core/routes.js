@@ -13,6 +13,7 @@ import TeacherDetailPage from 'src/modules/TeacherDetailPage';
 import ProfilePage from 'src/modules/ProfilePage';
 import AdminPage from 'src/modules/AdminPage';
 import NewPassword from 'src/modules/AuthenticatePage/NewPassword';
+import NewsPage from 'src/modules/NewsPage';
 
 const routes = [
   {
@@ -44,6 +45,10 @@ const routes = [
   {
     path: '/forgot',
     element: <ForgotPassword />,
+  },
+  {
+    path: '/news',
+    element: <NewsPage />,
   },
   {
     path: '/newpassword/:id',

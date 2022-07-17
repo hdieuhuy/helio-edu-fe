@@ -52,6 +52,13 @@ const Header = () => {
         navigate('/signup/teacher');
       },
     },
+    {
+      name: 'Tin tức',
+      pathname: '/news',
+      onClick: () => {
+        navigate('/news');
+      },
+    },
   ];
 
   useEffect(() => {

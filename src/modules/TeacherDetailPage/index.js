@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { Input, Modal, Rate, Select, Tag } from 'antd';
+import { Input, Modal, Rate, Select, Tag, Comment } from 'antd';
 import { Icon } from '@iconify/react';
 import { isEmpty } from 'lodash';
 import { SocketContext } from 'src/contexts/socket';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import { getFeedback } from 'src/core/api/feedback';
 import { getDetailTeacher } from 'src/core/api/teachers';
 import { feedbackForTeacher } from 'src/core/api/students';
 import { createClassroom, actionTeacher } from 'src/core/api/classroom';
@@ -21,6 +22,9 @@ const TeacherDetailPage = () => {
 
   const [data, setData] = useState({});
   const [teacherInfo, setTeacherInfo] = useState({});
+  const [feedbackTeacher, setFeedbackTeacher] = useState([]);
+
+  console.log({ feedbackTeacher });
 
   const [hour, setHour] = useState(1);
   const [isModalFeedback, setModalFeedback] = useState(false);
@@ -32,6 +36,9 @@ const TeacherDetailPage = () => {
 
   const isCurrentStudent = user?._id === data?.student?._id;
 
+  /**
+   * Effects
+   */
   useEffect(() => {
     if (isEmpty(id)) return;
     const getDetail = async () => {
@@ -88,6 +95,20 @@ const TeacherDetailPage = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (isEmpty(id)) return;
+    const getFeedbackTeacher = async () => {
+      const res = await getFeedback(id);
+
+      setFeedbackTeacher(res?.data?.data?.teacherFeedback);
+    };
+
+    getFeedbackTeacher();
+  }, []);
+
+  /**
+   * Functions
+   */
   const handleCreateClassroom = () => {
     if (user?.profile?.money < teacherInfo?.profile?.priceRent)
       return toast.error('Số tiền không đủ để thuê');
@@ -109,10 +130,21 @@ const TeacherDetailPage = () => {
     });
 
     if (res.data.status === 'OK') {
+      setModalFeedback(false);
       return toast.success(res.data.message);
     }
 
     return toast.error(res.data.message);
+  };
+
+  const renderInfoStudent = (info) => {
+    const firstName = info?.profile?.firstName;
+    const lastName = info?.profile?.lastName;
+    const email = info?.email;
+
+    if (isEmpty(firstName) || isEmpty(lastName)) return <b>{email}</b>;
+
+    return `${firstName} ${lastName}`;
   };
 
   const renderSubjects = teacherInfo?.profile?.subjects?.map((item, index) => (
@@ -247,7 +279,28 @@ const TeacherDetailPage = () => {
         </Modal>
       </div>
 
-      <div className="feedback"></div>
+      {feedbackTeacher.length > 0 && (
+        <div className="feedback">
+          <div className="title">Đánh giá của các học sinh</div>
+
+          {feedbackTeacher.map((item, index) => {
+            return (
+              <Comment
+                content={item.feedback.map((el, i) => (
+                  <div key={`comment-item-${i}`} className="comment-item">
+                    <p>{el.content}</p>
+
+                    <Rate allowHalf value={el.rate} disabled />
+                  </div>
+                ))}
+                avatar={<Avatar src={item.profile.avatar} />}
+                key={`feedback-item-${index}`}
+                author={renderInfoStudent(item)}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
