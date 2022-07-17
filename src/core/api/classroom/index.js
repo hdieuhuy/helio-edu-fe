@@ -31,7 +31,7 @@ export const finishTeach = (id) => {
 
 export const getHistoryRent = ({ studentID }) => {
   return axios
-    .get(`${config}/classroom/${studentID}`)
+    .get(`${config}/classroom/profile/${studentID}`)
     .then((res) => res)
     .catch((error) => error);
 };
