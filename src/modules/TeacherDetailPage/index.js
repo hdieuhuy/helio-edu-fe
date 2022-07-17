@@ -81,6 +81,13 @@ const TeacherDetailPage = () => {
     }, 1000 * 60 * 3);
   }, [data]);
 
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+
   const handleCreateClassroom = () => {
     if (user?.profile?.money < teacherInfo?.profile?.priceRent)
       return toast.error('Số tiền không đủ để thuê');
