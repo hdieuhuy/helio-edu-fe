@@ -21,7 +21,7 @@ const Avatar = ({ src, ...rest }) => {
       </IconWrapper>
     );
 
-  return <AntdAvatar size={48} src={src} {...rest} />;
+  return <AntdAvatar {...rest} src={src} style={{ width: 48, height: 48 }} />;
 };
 
 export default Avatar;

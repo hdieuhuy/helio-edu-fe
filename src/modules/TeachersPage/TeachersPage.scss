@@ -6,6 +6,33 @@
 
   .header {
     margin-bottom: 24px;
+
+    .title {
+      margin-bottom: 16px;
+
+      display: flex;
+      align-items: center;
+
+      @include text(var(--primary), 20px, var(--font-family-semibold));
+
+      span {
+        margin-right: 8px;
+      }
+
+      svg {
+        cursor: pointer;
+      }
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 24px;
+
+      .ant-select {
+        width: 100%;
+      }
+    }
   }
 
   .container {

@@ -54,7 +54,6 @@ const FormProfile = () => {
     'Lịch sử',
     'Địa lý',
     'Giáo dục công nhân',
-    'Địa lý',
     'Tin học',
     'Ngoại ngữ khác',
 
@@ -252,7 +251,7 @@ const FormProfile = () => {
         </Form.Item>
 
         <Form.Item
-          label="Tốt nghiệp tại"
+          label="Tốt nghiệp hoặc đang học tại"
           name="graduate"
           rules={[{ required: true, message: 'Tốt nghiệp không được rỗng' }]}
         >

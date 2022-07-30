@@ -46,7 +46,7 @@ const Header = () => {
       },
     },
     {
-      name: 'Đăng ký gia sư',
+      name: 'Đăng ký trở thành gia sư',
       pathname: '/signup/teacher',
       onClick: () => {
         navigate('/signup/teacher');

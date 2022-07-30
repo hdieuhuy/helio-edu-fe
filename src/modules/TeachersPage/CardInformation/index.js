@@ -36,7 +36,8 @@ const CardInformation = ({ data }) => {
 
       <div className="main">
         <div className="full-name">
-          {data?.profile?.firstName} {data?.profile?.lastName}
+          {data?.profile?.firstName} {data?.profile?.lastName}-{' '}
+          {data?.profile?.gender === 'MALE' ? 'Nam' : 'Nữ'}
         </div>
 
         <div className="graduate">{data?.profile?.graduate}</div>

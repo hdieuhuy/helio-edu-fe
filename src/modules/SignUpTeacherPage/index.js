@@ -1,15 +1,27 @@
-import React from 'react';
-import { DatePicker, Divider, Form, Input, InputNumber, Select } from 'antd';
+import React, { useState } from 'react';
+import {
+  DatePicker,
+  Divider,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Upload,
+} from 'antd';
 import { Button } from 'src/components';
 import { registerTeacher } from 'src/core/api/teachers';
 
 import { toast } from 'react-toastify';
 import { formatPrice } from 'src/utils';
+import { Icon } from '@iconify/react';
 
 const { Option } = Select;
 
 const SignUpTeacherPage = () => {
   const [form] = Form.useForm();
+  const [fileInfo, setFileInfo] = useState({});
+
+  console.log({ a: form.getFieldsValue() });
 
   const listSubjects = [
     'Văn học',
@@ -21,7 +33,6 @@ const SignUpTeacherPage = () => {
     'Lịch sử',
     'Địa lý',
     'Giáo dục công nhân',
-    'Địa lý',
     'Tin học',
     'Ngoại ngữ khác',
 
@@ -31,8 +42,27 @@ const SignUpTeacherPage = () => {
     'Tài chính',
   ];
 
+  const normFile = (e) => {
+    const arrayImage = ['png', 'jpg', 'jpeg', 'pdf'];
+    const type = e?.file?.type?.split('/')[1];
+    console.log({ e });
+
+    if (e.file.status === 'uploading') return;
+
+    if (!arrayImage.includes(type))
+      return toast.error('File này không được hỗ trợ');
+
+    setFileInfo(e);
+    form.setFieldsValue({
+      file: e.file.originFileObj,
+    });
+  };
+
   const onFinish = async (values) => {
-    const res = await registerTeacher(values);
+    const res = await registerTeacher({
+      ...values,
+      file: fileInfo.file.originFileObj,
+    });
 
     if (res.data.status === 'OK') {
       return toast.success(res.data.message);
@@ -182,7 +212,7 @@ const SignUpTeacherPage = () => {
             </Form.Item>
 
             <Form.Item
-              label="Tốt nghiệp tại"
+              label="Tốt nghiệp hoặc đang học tại"
               name="graduate"
               rules={[
                 { required: true, message: 'Tốt nghiệp không được rỗng' },
@@ -197,6 +227,7 @@ const SignUpTeacherPage = () => {
               rules={[
                 {
                   required: true,
+                  message: 'Học phí không được rỗng',
                 },
               ]}
             >
@@ -221,6 +252,30 @@ const SignUpTeacherPage = () => {
                 ))}
               </Select>
             </Form.Item>
+
+            <Form.Item
+              name="file"
+              label="Upload file CV"
+              getValueFromEvent={normFile}
+            >
+              <Upload showUploadList={false}>
+                <Button>
+                  <Icon
+                    icon="akar-icons:cloud-upload"
+                    style={{ marginRight: 8 }}
+                  />
+                  <span>Upload file</span>
+                </Button>
+              </Upload>
+            </Form.Item>
+
+            {fileInfo?.file?.name && (
+              <div>
+                <Icon icon="akar-icons:file" style={{ marginRight: 8 }} />
+
+                {fileInfo?.file?.name}
+              </div>
+            )}
           </div>
 
           <div className="area button">

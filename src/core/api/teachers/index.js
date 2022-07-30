@@ -3,9 +3,25 @@ import axios from 'axios';
 import { config } from 'src/core/config';
 
 export const registerTeacher = (data) => {
+  const formData = new FormData();
+  formData.append('file', data.file);
+  formData.append('email', data.email);
+  formData.append('birthday', data.birthday);
+  formData.append('firstName', data.firstName);
+  formData.append('gender', data.gender);
+  formData.append('graduate', data.graduate);
+  formData.append('introduce', data.introduce);
+  formData.append('lastName', data.lastName);
+  formData.append('phone', data.phone);
+  formData.append('priceRent', data.priceRent);
+  formData.append('subjects', data.subjects);
+  formData.append('work', data.work);
+
   return axios
-    .post(`${config}/teacher/signup`, {
-      ...data,
+    .post(`${config}/teacher/signup`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     })
     .then((res) => res)
     .catch((error) => error);

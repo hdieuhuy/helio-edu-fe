@@ -8,6 +8,9 @@ import { getUserProfile } from 'src/utils/clientCache';
 import { actionTeacher, finishTeach } from 'src/core/api/classroom';
 
 import Meeting from 'src/assets/images/meeting.json';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import 'animate.css';
 
 import routes from './core/routes';
 import { AnimationImage, Button } from './components';
@@ -104,7 +107,10 @@ const App = () => {
           disabled: data?.status === 'ACTIVE',
         }}
       >
-        <div>Bạn đang có lời mời dạy từ học sinh {renderInfoStudent()}</div>
+        <div>
+          Bạn đang có lời mời dạy từ học sinh {renderInfoStudent()}, môn học:{' '}
+          {data?.subject}
+        </div>
 
         <AnimationImage
           animationData={Meeting}

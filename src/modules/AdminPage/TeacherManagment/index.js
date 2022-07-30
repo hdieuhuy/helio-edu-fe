@@ -73,6 +73,20 @@ const TeacherManagment = () => {
       width: '20%',
     },
     {
+      title: 'CV',
+      dataIndex: 'urlDegree',
+      key: 'urlDegree',
+      render: (record) => {
+        if (!record) return null;
+
+        return (
+          <a href={record} target="_blank">
+            CV của gia sư
+          </a>
+        );
+      },
+    },
+    {
       title: 'Trạng thái',
       dataIndex: '',
       key: '',

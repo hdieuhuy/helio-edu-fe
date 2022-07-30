@@ -24,10 +24,9 @@ const TeacherDetailPage = () => {
   const [teacherInfo, setTeacherInfo] = useState({});
   const [feedbackTeacher, setFeedbackTeacher] = useState([]);
 
-  console.log({ feedbackTeacher });
-
   const [hour, setHour] = useState(1);
   const [isModalFeedback, setModalFeedback] = useState(false);
+  const [subject, setSubject] = useState('');
 
   const [rate, setRate] = useState(0);
   const [content, setContent] = useState('');
@@ -113,7 +112,10 @@ const TeacherDetailPage = () => {
     if (user?.profile?.money < teacherInfo?.profile?.priceRent)
       return toast.error('Số tiền không đủ để thuê');
 
+    if (isEmpty(subject)) return toast.error('Hãy chọn 1 môn học');
+
     createClassroom({
+      subject,
       teacherID: teacherInfo?._id,
       studentID: user?._id,
       startTime: new Date(),
@@ -159,7 +161,10 @@ const TeacherDetailPage = () => {
     <div className="hl-ml-teacher-detail">
       <div className="container">
         <div className="left-side">
-          <div className="box-info">
+          <div
+            className="box-info animate__animated animate__bounceInLeft"
+            style={{ '--animate-duration': '0.5s' }}
+          >
             <div className="avatar">
               <Avatar src={teacherInfo?.profile?.avatar} />
 
@@ -182,7 +187,10 @@ const TeacherDetailPage = () => {
             </div>
           </div>
 
-          <div className="box-info profile">
+          <div
+            className="box-info profile animate__animated animate__bounceInLeft"
+            style={{ '--animate-duration': '0.75s' }}
+          >
             <div className="label">Hồ sơ cá nhân</div>
 
             <div className="information">
@@ -192,7 +200,10 @@ const TeacherDetailPage = () => {
             </div>
           </div>
 
-          <div className="box-info verify">
+          <div
+            className="box-info verify animate__animated animate__bounceInLeft"
+            style={{ '--animate-duration': '0.85s' }}
+          >
             <div className="label">Hồ sơ đã được xác thực</div>
 
             <div className="verify-wrapper">
@@ -220,7 +231,7 @@ const TeacherDetailPage = () => {
           </div>
         </div>
 
-        <div className="right-side">
+        <div className="right-side animate__animated animate__bounceInRight">
           <div className="action">
             <div className="label">Thuê gia sư</div>
 
@@ -236,6 +247,18 @@ const TeacherDetailPage = () => {
               <Select.Option value="1">1 giờ</Select.Option>
               <Select.Option value="2">2 giờ</Select.Option>
               <Select.Option value="3">3 giờ</Select.Option>
+            </Select>
+
+            <Select
+              style={{ width: '100%', marginTop: 4 }}
+              placeholder="Hãy chọn 1 môn học"
+              onChange={(value) => setSubject(value)}
+            >
+              {teacherInfo?.profile?.subjects?.map((item, index) => (
+                <Select.Option value={item} key={`teacher-subject-${index}`}>
+                  {item}
+                </Select.Option>
+              ))}
             </Select>
 
             <Button
