@@ -106,6 +106,18 @@ const TeacherManagment = () => {
         );
       },
     },
+    {
+      title: 'Trạng thái dạy học',
+      dataIndex: '',
+      key: '',
+      render: (record) => {
+        return record.isWorking ? (
+          <Tag color="var(--primary)">Còn dạy</Tag>
+        ) : (
+          <Tag color="var(--flamenco-color)">Nghỉ dạy</Tag>
+        );
+      },
+    },
   ];
 
   useEffect(() => {

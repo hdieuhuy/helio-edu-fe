@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Tabs } from 'antd';
+import { Empty, Tabs } from 'antd';
 import { CopyOutlined, TeamOutlined } from '@ant-design/icons';
 
 import { useNavigate } from 'react-router-dom';
 import { getUserProfile } from 'src/utils/clientCache';
 import { Icon } from '@iconify/react';
+
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from 'recharts';
 
 import TeacherManagment from './TeacherManagment';
 import CommentManagment from './CommentManangment';
@@ -17,8 +27,16 @@ import {
   getTopTeacherAdmin,
 } from 'src/core/api/admin';
 import { Avatar } from 'src/components';
+import { isEmpty } from 'lodash';
 
 const { TabPane } = Tabs;
+
+const range = ({
+  from = 0,
+  to,
+  step = 1,
+  length = Math.ceil((to - from) / step),
+}) => Array.from({ length }, (_, i) => from + i * step);
 
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -28,7 +46,43 @@ const AdminPage = () => {
   const [topTeacher, setTopTeacher] = useState([]);
   const [subjectFavorite, setSubjectFavorite] = useState([]);
 
-  console.log({ subjectFavorite });
+  const data = [
+    {
+      name: 'Page A',
+      uv: 4000,
+      amt: 2400,
+    },
+    {
+      name: 'Page B',
+      uv: 3000,
+      amt: 2210,
+    },
+    {
+      name: 'Page C',
+      uv: 2000,
+      amt: 2290,
+    },
+    {
+      name: 'Page D',
+      uv: 2780,
+      amt: 2000,
+    },
+    {
+      name: 'Page E',
+      uv: 1890,
+      amt: 2181,
+    },
+    {
+      name: 'Page F',
+      uv: 2390,
+      amt: 2500,
+    },
+    {
+      name: 'Page G',
+      uv: 3490,
+      amt: 2100,
+    },
+  ];
 
   useEffect(() => {
     if (userProfile.email === 'coestarvn205@gmail.com') return;
@@ -68,6 +122,8 @@ const AdminPage = () => {
 
     _getSubjectFavorite();
   }, []);
+
+  const newIndex = range({ from: 4, length: 10 });
 
   return (
     <div className="hl-ml-admin">
@@ -176,11 +232,15 @@ const AdminPage = () => {
             {topTeacher
               .filter((_, index) => index > 2)
               .map((item, index) => {
-                const newIndex = 3;
-
+                return {
+                  ...item,
+                  index: newIndex[index],
+                };
+              })
+              .map((item, index) => {
                 return (
                   <div className="item" key={`top-teacher-${index}`}>
-                    <div className="index">{newIndex + 1}</div>
+                    <div className="index">{item?.index}</div>
 
                     <div className="info">
                       <Avatar src={item?.profile?.avatar} size={40} />
@@ -197,8 +257,31 @@ const AdminPage = () => {
           </div>
         </div>
 
-        <div className="subject-favorite">
+        <div className="subject-favorite animate__animated animate__fadeInRight">
           <div className="title">Bảng xếp hạng top gia sư được thuê</div>
+
+          {!isEmpty(subjectFavorite) ? (
+            <Empty title="Không có dữ liệu để hiển thị" />
+          ) : (
+            <BarChart
+              width={850}
+              height={600}
+              data={data}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="uv" fill="#82ca9d" />
+            </BarChart>
+          )}
         </div>
       </div>
 
