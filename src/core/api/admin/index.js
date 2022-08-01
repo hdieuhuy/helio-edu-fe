@@ -17,7 +17,7 @@ export const getTopTeacherAdmin = () => {
 
 export const getComments = () => {
   return axios
-    .get(`${config}/admin/comments`)
+    .get(`${config}/admin/comment`)
     .then((res) => res)
     .catch((error) => error);
 };
