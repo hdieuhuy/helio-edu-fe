@@ -1,27 +1,43 @@
 .hl-ml-signup-teacher {
-  padding: 48px 360px;
-  min-height: 100vh;
+  @include responsive(retina-5k) {
+    padding: 48px 360px;
+    min-height: 100vh;
 
-  .header {
-    .title {
-      margin-bottom: 16px;
-      text-align: center;
-      text-transform: uppercase;
+    .header {
+      .title {
+        margin-bottom: 16px;
+        text-align: center;
+        text-transform: uppercase;
 
-      @include text(var(--primary), 24px, var(--font-family-semibold));
+        @include text(var(--primary), 24px, var(--font-family-semibold));
+      }
+    }
+
+    .form {
+      .area {
+        .heading {
+          margin-bottom: 16px;
+          @include text(var(--black-dark-2), 18px, var(--font-family-semibold));
+        }
+
+        &.button {
+          display: flex;
+          justify-content: flex-end;
+        }
+      }
     }
   }
 
-  .form {
-    .area {
-      .heading {
-        margin-bottom: 16px;
-        @include text(var(--black-dark-2), 18px, var(--font-family-semibold));
-      }
+  @include responsive(md) {
+    padding: 24px;
+  }
 
-      &.button {
-        display: flex;
-        justify-content: flex-end;
+  @include responsive(sm) {
+    padding: 16px;
+
+    .header {
+      .title {
+        font-size: 18px;
       }
     }
   }

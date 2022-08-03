@@ -12,7 +12,7 @@ import { Button } from 'src/components';
 import { registerTeacher } from 'src/core/api/teachers';
 
 import { toast } from 'react-toastify';
-import { formatPrice } from 'src/utils';
+import { formatPrice, getScreenMode } from 'src/utils';
 import { Icon } from '@iconify/react';
 
 const { Option } = Select;
@@ -21,7 +21,7 @@ const SignUpTeacherPage = () => {
   const [form] = Form.useForm();
   const [fileInfo, setFileInfo] = useState({});
 
-  console.log({ a: form.getFieldsValue() });
+  const { mobileMode } = getScreenMode();
 
   const listSubjects = [
     'Văn học',
@@ -147,13 +147,13 @@ const SignUpTeacherPage = () => {
               <Input placeholder="Nhập email" />
             </Form.Item>
 
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: mobileMode ? 'block' : 'flex' }}>
               <Form.Item
                 label="Giới tính"
                 name="gender"
                 initialValue="MALE"
                 rules={[{ required: true }]}
-                style={{ width: '50%', marginRight: 12 }}
+                style={{ width: mobileMode ? '100%' : '50%', marginRight: 12 }}
               >
                 <Select style={{ width: '100%' }}>
                   <Option value="MALE">Nam</Option>
@@ -167,7 +167,7 @@ const SignUpTeacherPage = () => {
                 rules={[
                   { required: true, message: 'Giá thuê không được rỗng' },
                 ]}
-                style={{ width: '50%' }}
+                style={{ width: mobileMode ? '100%' : '50%' }}
               >
                 <DatePicker placeholder="Ngày sinh" style={{ width: '100%' }} />
               </Form.Item>

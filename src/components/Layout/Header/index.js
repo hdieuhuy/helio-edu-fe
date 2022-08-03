@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useContext } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
-import { Menu, Dropdown } from 'antd';
+import { Menu, Dropdown, Drawer } from 'antd';
 import Logo from 'src/assets/images/logo.png';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
@@ -31,6 +31,8 @@ const Header = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const isSinglePage = useCheckPathName();
+
+  const [visible, setVisible] = useState(false);
 
   const { headerRefresh } = useContext(HeaderContext);
 
@@ -79,6 +81,14 @@ const Header = () => {
 
   const goToProfile = () => {
     navigate('/profile');
+  };
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
   };
 
   const menu = useMemo(
@@ -149,6 +159,8 @@ const Header = () => {
           Đăng nhập
         </Button>
       )}
+
+      <Icon icon="bx:menu" className="icon-feature" onClick={showDrawer} />
     </div>
   );
 
@@ -179,6 +191,10 @@ const Header = () => {
       {renderFeatures}
 
       {renderPersonal}
+
+      <Drawer placement="right" onClose={onClose} visible={visible} width={280}>
+        {renderFeatures}
+      </Drawer>
     </div>
   );
 };

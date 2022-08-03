@@ -1,33 +1,134 @@
 .layout__header {
-  display: flex;
-  align-items: center;
-  background-color: var(--white);
+  @include responsive(retina-5k) {
+    display: flex;
+    align-items: center;
+    background-color: var(--white);
 
-  height: 80px;
-  padding: 0 56px;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    height: 80px;
+    padding: 0 56px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
 
-  top: 0;
-  z-index: 10;
-  position: sticky;
+    top: 0;
+    z-index: 10;
+    position: sticky;
 
-  .logo {
-    width: 120px;
-    margin-right: 60px;
+    .logo {
+      width: 120px;
+      margin-right: 60px;
 
-    img {
-      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+
+    .feature {
+      display: flex;
+      width: 35%;
+
+      &-item {
+        cursor: pointer;
+        margin-right: calc-to-rem(24);
+        transition: all 0.25s;
+
+        @include text(var(--black), 16px, var(--font-family-main));
+
+        &.active {
+          @include text(var(--primary), 16px, var(--font-family-semibold));
+
+          &:hover {
+            @include text(var(--primary), 16px, var(--font-family-semibold));
+          }
+        }
+
+        &:hover {
+          transition: all 0.25s;
+
+          @include text(var(--primary), 16px, var(--font-family-main));
+        }
+      }
+
+      &-item:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .personal {
+      width: 60%;
+      display: flex;
+      justify-content: flex-end;
+
+      .ant-btn {
+        height: 40px;
+      }
+    }
+
+    &--onlylogo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: calc-to-rem(80);
+      padding: 0 calc-to-rem(32);
+      box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+
+      .logo {
+        width: calc-to-rem(120);
+        margin-right: 0;
+
+        img {
+          width: 100%;
+        }
+      }
     }
   }
 
-  .feature {
-    display: flex;
-    width: 35%;
+  @include responsive(md) {
+    .feature {
+      width: 100%;
+    }
 
+    .personal {
+      width: unset;
+
+      .icon-feature {
+        display: none;
+      }
+    }
+  }
+
+  @include responsive(sm) {
+    padding: 0 16px;
+    justify-content: space-between;
+
+    .logo {
+      margin-right: 16px;
+
+      width: 92px;
+    }
+
+    .feature {
+      display: none;
+    }
+
+    .personal {
+      align-items: center;
+
+      .icon-feature {
+        font-size: 30px;
+        margin-left: 8px;
+
+        display: block;
+      }
+    }
+  }
+}
+
+.ant-drawer-body {
+  .feature {
     &-item {
       cursor: pointer;
-      margin-right: calc-to-rem(24);
       transition: all 0.25s;
+      margin-bottom: 24px;
 
       @include text(var(--black), 16px, var(--font-family-main));
 
@@ -37,45 +138,6 @@
         &:hover {
           @include text(var(--primary), 16px, var(--font-family-semibold));
         }
-      }
-
-      &:hover {
-        transition: all 0.25s;
-
-        @include text(var(--primary), 16px, var(--font-family-main));
-      }
-    }
-
-    &-item:last-child {
-      margin-right: 0;
-    }
-  }
-
-  .personal {
-    width: 60%;
-    display: flex;
-    justify-content: flex-end;
-
-    .ant-btn {
-      height: 40px;
-    }
-  }
-
-  &--onlylogo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    height: calc-to-rem(80);
-    padding: 0 calc-to-rem(32);
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
-
-    .logo {
-      width: calc-to-rem(120);
-      margin-right: 0;
-
-      img {
-        width: 100%;
       }
     }
   }

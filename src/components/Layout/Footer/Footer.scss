@@ -1,87 +1,128 @@
 .layout__footer {
-  width: 100%;
-  height: 300px;
-
-  padding: 16px 56px;
-
-  background-color: var(--silver);
-
-  .divider {
+  @include responsive(retina-5k) {
     width: 100%;
-    height: 1px;
+    min-height: 300px;
 
-    background-color: var(--black-dark);
+    padding: 16px 56px;
 
-    margin: 16px 0;
-    opacity: 0.2;
-  }
+    background-color: var(--silver);
 
-  .top {
-    .brand {
-      img {
-        width: 100px;
-      }
+    .divider {
+      width: 100%;
+      height: 1px;
+
+      background-color: var(--black-dark);
+
+      margin: 16px 0;
+      opacity: 0.2;
     }
 
-    .information {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      &--item {
-        .text {
-          margin-bottom: 16px;
-
-          @include text(var(--black-dark-3), 16px, var(--font-family-main));
+    .top {
+      .brand {
+        img {
+          width: 100px;
         }
+      }
 
-        svg {
-          margin-right: 16px;
-          cursor: pointer;
+      .information {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-          @include text(var(--black-dark-3), 24px, var(--font-family-main));
-        }
+        &--item {
+          .text {
+            margin-bottom: 16px;
 
-        .block {
-          display: flex;
-          align-items: center;
-          margin-bottom: 16px;
-        }
-
-        .info {
-          display: flex;
-
-          margin-bottom: 16px;
-
-          .key {
-            margin-right: 4px;
-            @include text(var(--black-dark-3), 16px, var(--font-family-bold));
-          }
-
-          .value {
             @include text(var(--black-dark-3), 16px, var(--font-family-main));
           }
+
+          svg {
+            margin-right: 16px;
+            cursor: pointer;
+
+            @include text(var(--black-dark-3), 24px, var(--font-family-main));
+          }
+
+          .block {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+          }
+
+          .info {
+            display: flex;
+
+            margin-bottom: 16px;
+
+            .key {
+              margin-right: 4px;
+              @include text(var(--black-dark-3), 16px, var(--font-family-bold));
+            }
+
+            .value {
+              @include text(var(--black-dark-3), 16px, var(--font-family-main));
+            }
+          }
         }
+      }
+    }
+
+    .bottom {
+      display: flex;
+
+      .left {
+        width: 50%;
+
+        span {
+          margin-right: 20px;
+        }
+      }
+
+      .right {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
       }
     }
   }
 
-  .bottom {
-    display: flex;
+  @include responsive(md) {
+    .top {
+      .information {
+        flex-direction: column;
+        align-items: flex-start;
 
-    .left {
-      width: 50%;
-
-      span {
-        margin-right: 20px;
+        &--item {
+          margin-bottom: 16px;
+        }
       }
     }
 
-    .right {
-      width: 50%;
-      display: flex;
-      justify-content: flex-end;
+    .bottom {
+      .right {
+        text-align: right;
+      }
+    }
+  }
+
+  @include responsive(sm) {
+    padding: 16px;
+
+    .bottom {
+      .left {
+        display: flex;
+        flex-direction: column;
+
+        span {
+          margin-bottom: 8px;
+          margin-right: 0;
+        }
+      }
+
+      .right {
+        line-height: 1.5;
+      }
     }
   }
 }

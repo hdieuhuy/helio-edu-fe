@@ -1,225 +1,376 @@
 .hl-ml-home {
-  width: 100%;
-  height: 100%;
-
-  .area-first {
+  @include responsive(retina-5k) {
     width: 100%;
-    height: 600px;
+    height: 100%;
 
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-
-    .title {
-      padding-top: 48px;
-      margin-bottom: 24px;
-
-      div {
-        margin-bottom: 24px;
-        text-align: center;
-        text-transform: uppercase;
-
-        @include text(var(--black-dark-2), 30px, var(--font-family-bold));
-      }
-
-      span {
-        @include text(var(--black-dark-2), 28px, var(--font-family-main));
-      }
-    }
-
-    .ant-btn {
-      height: 48px;
-      @include text(var(--white), 20px, var(--font-family-main));
-    }
-  }
-
-  .area-services {
-    width: 100%;
-    height: auto;
-    padding: 60px 56px;
-
-    .services-item {
-      .label {
-        @include text(var(--primary), 26px, var(--font-family-bold));
-        margin-bottom: 16px;
-      }
-
-      .content {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 24px;
-
-        & > div {
-          .key {
-            margin-bottom: 8px;
-            @include text(
-              var(--black-dark-3),
-              20px,
-              var(--font-family-semibold)
-            );
-          }
-
-          .value {
-            line-height: 2;
-
-            @include text(var(--black-dark-3), 18px, var(--font-family-main));
-          }
-        }
-      }
-    }
-  }
-
-  .area-second {
-    &--item {
+    .area-first {
       width: 100%;
       height: 600px;
 
       display: flex;
       align-items: center;
-      padding: 20px 56px;
+      flex-direction: column;
 
-      &.even {
-        flex-direction: row-reverse;
+      .title {
+        padding-top: 48px;
+        margin-bottom: 24px;
 
-        .left {
-          .title {
-            width: 100%;
-            text-align: right;
-          }
+        div {
+          margin-bottom: 24px;
+          text-align: center;
+          text-transform: uppercase;
 
-          .desc {
-            text-align: right;
-          }
+          @include text(var(--black-dark-2), 30px, var(--font-family-bold));
+        }
+
+        span {
+          @include text(var(--black-dark-2), 28px, var(--font-family-main));
         }
       }
 
-      .left {
-        width: 50%;
-        height: 100%;
+      .ant-btn {
+        height: 48px;
+        @include text(var(--white), 20px, var(--font-family-main));
+      }
+    }
 
-        padding: 24px;
+    .area-services {
+      width: 100%;
+      height: auto;
+      padding: 60px 56px;
+
+      .services-item {
+        .label {
+          @include text(var(--primary), 26px, var(--font-family-bold));
+          margin-bottom: 16px;
+        }
+
+        .content {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: 24px;
+
+          & > div {
+            .key {
+              margin-bottom: 8px;
+              @include text(
+                var(--black-dark-3),
+                20px,
+                var(--font-family-semibold)
+              );
+            }
+
+            .value {
+              line-height: 2;
+
+              @include text(var(--black-dark-3), 18px, var(--font-family-main));
+            }
+          }
+        }
+      }
+    }
+
+    .area-second {
+      &--item {
+        width: 100%;
+        height: 600px;
 
         display: flex;
         align-items: center;
-        justify-content: center;
-        flex-direction: column;
+        padding: 20px 56px;
 
-        .title {
-          width: 100%;
-          margin-bottom: 24px;
+        &.even {
+          flex-direction: row-reverse;
 
-          @include text(var(--primary), 32px, var(--font-family-bold));
+          .left {
+            .title {
+              width: 100%;
+              text-align: right;
+            }
+
+            .desc {
+              text-align: right;
+            }
+          }
         }
 
-        .desc {
-          @include text(var(--black-dark-2), 18px, var(--font-family-main));
+        .left {
+          width: 50%;
+          height: 100%;
+
+          padding: 24px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+
+          .title {
+            width: 100%;
+            margin-bottom: 24px;
+
+            @include text(var(--primary), 32px, var(--font-family-bold));
+          }
+
+          .desc {
+            @include text(var(--black-dark-2), 18px, var(--font-family-main));
+            line-height: 1.5;
+          }
+        }
+
+        .right {
+          width: 50%;
+        }
+      }
+    }
+
+    .area-third {
+      width: 100%;
+      height: 100%;
+
+      padding: 24px 0;
+
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+      .container {
+        width: 640px;
+        height: 100%;
+
+        .title {
+          text-align: center;
+          margin-bottom: 16px;
+          text-transform: uppercase;
+
+          @include text(var(--primary), 24px, var(--font-family-bold));
+        }
+
+        .btn-form {
+          .ant-form-item-control-input-content {
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+      }
+    }
+
+    .area-teacher {
+      padding: 0 36px;
+
+      .title {
+        @include text(var(--primary), 20px, var(--font-family-bold));
+        margin-bottom: 24px;
+      }
+
+      .teacher-wrapper {
+        display: grid;
+        grid-gap: 16px;
+        grid-template-columns: repeat(3, 1fr);
+
+        .teacher-info {
+          background-color: #eaf4fc;
+
+          border-radius: 16px;
+
+          display: flex;
+          flex-direction: column;
+          padding: 24px;
+          min-height: 240px;
+
+          .avatar {
+            display: flex;
+            justify-content: center;
+          }
+
+          .name {
+            text-align: center;
+
+            margin: 16px 0;
+
+            @include text(
+              var(--black-dark-3),
+              18px,
+              var(--font-family-semibold)
+            );
+          }
+
+          .box-info {
+            display: flex;
+
+            padding: 8px 0;
+
+            .key {
+              width: 20%;
+
+              @include text(var(--black-dark-3), 16px, var(--font-family-main));
+              margin-right: 8px;
+            }
+
+            .value {
+              width: 80%;
+
+              @include text(var(--black-dark-3), 16px, var(--font-family-bold));
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+              max-width: 300px;
+            }
+          }
+
+          .actions {
+            margin-top: 16px;
+
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+      }
+    }
+  }
+
+  @include responsive(md) {
+    .area-first {
+      .title {
+        span {
+          text-align: center;
+          width: 100%;
+          display: block;
+
+          font-size: 20px;
+        }
+      }
+    }
+
+    .area-second {
+      &--item,
+      &.even {
+        flex-direction: column !important;
+        height: unset;
+
+        .left {
+          width: 100%;
+
+          .title.title.title {
+            text-align: center;
+          }
+
+          .desc.desc.desc {
+            text-align: center;
+          }
+        }
+
+        .right {
+          width: 100%;
+        }
+
+        div[aria-label='animation'] {
+          width: 400px !important;
+          height: 400px !important;
+        }
+      }
+    }
+
+    .area-teacher {
+      .teacher-wrapper {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
+
+  @include responsive(sm) {
+    .area-first {
+      .title {
+        padding: 32px 16px;
+        padding-bottom: 0;
+
+        div {
+          font-size: 20px;
+          line-height: 1.5;
+        }
+
+        span {
+          font-size: 16px;
           line-height: 1.5;
         }
       }
-
-      .right {
-        width: 50%;
-      }
-    }
-  }
-
-  .area-third {
-    width: 100%;
-    height: 100%;
-
-    padding: 24px 0;
-
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-
-    .container {
-      width: 640px;
-      height: 100%;
-
-      .title {
-        text-align: center;
-        margin-bottom: 16px;
-        text-transform: uppercase;
-
-        @include text(var(--primary), 24px, var(--font-family-bold));
-      }
-
-      .btn-form {
-        .ant-form-item-control-input-content {
-          display: flex;
-          justify-content: flex-end;
-        }
-      }
-    }
-  }
-
-  .area-teacher {
-    padding: 0 36px;
-
-    .title {
-      @include text(var(--primary), 20px, var(--font-family-bold));
-      margin-bottom: 24px;
     }
 
-    .teacher-wrapper {
-      display: grid;
-      grid-gap: 16px;
-      grid-template-columns: repeat(3, 1fr);
+    .area-services {
+      padding: 48px 16px;
 
-      .teacher-info {
-        background-color: #eaf4fc;
+      .services-item {
+        .content {
+          grid-template-columns: repeat(1, 1fr);
 
-        border-radius: 16px;
-
-        display: flex;
-        flex-direction: column;
-        padding: 24px;
-        min-height: 240px;
-
-        .avatar {
-          display: flex;
-          justify-content: center;
-        }
-
-        .name {
-          text-align: center;
-
-          margin: 16px 0;
-
-          @include text(var(--black-dark-3), 18px, var(--font-family-semibold));
-        }
-
-        .box-info {
-          display: flex;
-
-          padding: 8px 0;
-
-          .key {
-            width: 20%;
-
-            @include text(var(--black-dark-3), 16px, var(--font-family-main));
-            margin-right: 8px;
-          }
-
-          .value {
-            width: 80%;
-
-            @include text(var(--black-dark-3), 16px, var(--font-family-bold));
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            max-width: 300px;
+          & > div {
+            .value {
+              text-align: justify;
+            }
           }
         }
+      }
+    }
 
-        .actions {
-          margin-top: 16px;
+    .area-second {
+      &--item,
+      &.even {
+        padding: 0;
 
-          display: flex;
-          justify-content: flex-end;
+        div[aria-label='animation'] {
+          width: 240px !important;
+          height: 240px !important;
         }
+
+        .left {
+          .title {
+            line-height: 1.5;
+          }
+
+          .desc {
+            text-align: justify;
+          }
+        }
+      }
+    }
+
+    .area-teacher {
+      padding: 0 16px;
+
+      .teacher-wrapper {
+        .teacher-info {
+          padding: 8px;
+
+          .box-info {
+            flex-direction: column;
+            align-items: center;
+
+            margin-bottom: 16px;
+
+            .key {
+              width: 100%;
+              text-align: center;
+
+              margin-bottom: 8px;
+            }
+
+            .value {
+              text-align: center;
+            }
+          }
+
+          .actions {
+            margin-right: 16px;
+            margin-bottom: 16px;
+          }
+        }
+      }
+    }
+
+    .area-third {
+      .container {
+        width: 360px;
       }
     }
   }
