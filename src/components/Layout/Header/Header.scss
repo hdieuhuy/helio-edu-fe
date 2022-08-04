@@ -60,6 +60,10 @@
       .ant-btn {
         height: 40px;
       }
+
+      .icon-feature {
+        display: none;
+      }
     }
 
     &--onlylogo {
@@ -89,10 +93,10 @@
 
     .personal {
       width: unset;
+    }
 
-      .icon-feature {
-        display: none;
-      }
+    &--onlylogo {
+      justify-content: center;
     }
   }
 

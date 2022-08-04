@@ -1,77 +1,121 @@
 .hl-ml-signup {
-  width: 100%;
-  min-height: 60vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .container {
+  @include responsive(retina-5k) {
     width: 100%;
+    min-height: 60vh;
+
     display: flex;
-    flex-direction: row-reverse;
-    margin: 48px 248px;
+    align-items: center;
+    justify-content: center;
 
-    border-radius: 8px;
-    box-shadow: 1px 1px 6px 0.5px rgba(0, 0, 0, 0.24);
-
-    .divider {
-      width: 1px;
-      background-color: var(--silver);
-      margin: 24px 0;
-
+    .container {
+      width: 100%;
       display: flex;
-      align-items: center;
+      flex-direction: row-reverse;
+      margin: 48px 248px;
 
-      opacity: 0.5;
-    }
+      border-radius: 8px;
+      box-shadow: 1px 1px 6px 0.5px rgba(0, 0, 0, 0.24);
 
-    .left {
-      width: 50%;
+      .divider {
+        width: 1px;
+        background-color: var(--silver);
+        margin: 24px 0;
 
-      img {
-        width: 100%;
-        height: 480px;
-      }
-    }
-
-    .right {
-      width: 50%;
-      padding: 24px;
-
-      .title {
-        @include text(var(--primary), 24px, var(--font-family-bold));
-
-        margin-bottom: 24px;
-      }
-
-      .actions {
-        width: 100%;
         display: flex;
+        align-items: center;
 
-        .signup {
-          width: 65%;
+        opacity: 0.5;
+      }
 
-          @include text(var(--black-dark-2), 16px, var(--font-family-main));
+      .left {
+        width: 50%;
 
-          span {
-            margin-left: 4px;
-            cursor: pointer;
-            @include text(var(--primary), 16px, var(--font-family-semibold));
-          }
+        img {
+          width: 100%;
+          height: 480px;
+        }
+      }
+
+      .right {
+        width: 50%;
+        padding: 24px;
+
+        .title {
+          @include text(var(--primary), 24px, var(--font-family-bold));
+
+          margin-bottom: 24px;
         }
 
-        .forgot {
-          width: 35%;
-          cursor: pointer;
-
+        .actions {
+          width: 100%;
           display: flex;
-          justify-content: flex-end;
 
-          span {
+          .signup {
+            width: 65%;
+
             @include text(var(--black-dark-2), 16px, var(--font-family-main));
+
+            span {
+              margin-left: 4px;
+              cursor: pointer;
+              @include text(var(--primary), 16px, var(--font-family-semibold));
+            }
+          }
+
+          .forgot {
+            width: 35%;
+            cursor: pointer;
+
+            display: flex;
+            justify-content: flex-end;
+
+            span {
+              @include text(var(--black-dark-2), 16px, var(--font-family-main));
+            }
           }
         }
+      }
+    }
+  }
+
+  @include responsive(md) {
+    .container {
+      margin: 48px 36px;
+
+      .right {
+        .actions {
+          flex-direction: column;
+
+          .signup {
+            margin-bottom: 16px;
+            width: 100%;
+          }
+
+          .forgot {
+            width: 100%;
+            justify-content: flex-start;
+          }
+        }
+      }
+    }
+  }
+
+  @include responsive(sm) {
+    .container {
+      margin: 16px;
+      flex-direction: column;
+
+      .left {
+        width: 100%;
+      }
+
+      .divider {
+        display: none;
+      }
+
+      .right {
+        width: 100%;
+        padding: 8px;
       }
     }
   }

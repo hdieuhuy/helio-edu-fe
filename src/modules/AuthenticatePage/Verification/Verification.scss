@@ -1,24 +1,32 @@
 .hl-ml-verification {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
+  @include responsive(retina-5k) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 
-  padding: 24px 0;
-  min-height: 70vh;
+    padding: 24px 0;
+    min-height: 70vh;
 
-  img {
-    width: 480px;
-    margin-bottom: 20px;
-  }
+    img {
+      width: 480px;
+      margin-bottom: 20px;
+    }
 
-  &.verify-false {
+    &.verify-false {
+      .title {
+        @include text(var(--cinnabar-color), 28px, var(--font-family-semibold));
+      }
+    }
+
     .title {
-      @include text(var(--cinnabar-color), 28px, var(--font-family-semibold));
+      @include text(var(--primary), 28px, var(--font-family-semibold));
     }
   }
 
-  .title {
-    @include text(var(--primary), 28px, var(--font-family-semibold));
+  @include responsive(sm) {
+    img {
+      width: 320px;
+    }
   }
 }
