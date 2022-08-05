@@ -210,16 +210,13 @@ const TeacherDetailPage = () => {
               <div className="verify-item">
                 <Icon icon="bi:check-circle-fill" />
 
-                <span>
-                  Đã xác thực thông tin hồ sơ: thông tin cá nhân, kinh nghiệm,
-                  dạy kèm,...
-                </span>
+                <span>Đã phỏng vấn</span>
               </div>
 
               <div className="verify-item">
                 <Icon icon="bi:check-circle-fill" />
 
-                <span>Đã phỏng vấn</span>
+                <span>Đã xác thực thông tin hồ sơ</span>
               </div>
 
               <div className="verify-item">

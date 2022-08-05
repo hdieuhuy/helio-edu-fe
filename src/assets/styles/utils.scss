@@ -323,7 +323,7 @@ $zVals: 1, 3000, 9000;
       @content;
     }
   } @else if $canvas == md {
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 992px) {
       @content;
     }
   } @else if $canvas == lg {
