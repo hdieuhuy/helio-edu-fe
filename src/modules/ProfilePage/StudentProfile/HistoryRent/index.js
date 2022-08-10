@@ -44,6 +44,7 @@ const HistoryRent = () => {
       title: 'Họ tên gia sư',
       dataIndex: '',
       key: '',
+      responsive: ['xs', 'md'],
       render: (data) => {
         return (
           <div>
@@ -56,6 +57,7 @@ const HistoryRent = () => {
     {
       title: 'Giá thuê',
       dataIndex: '',
+      responsive: ['xs', 'md'],
       key: '',
       render: (data) => {
         return (
@@ -68,6 +70,7 @@ const HistoryRent = () => {
     {
       title: 'Giờ bắt đầu thuê',
       dataIndex: '',
+      responsive: ['xs', 'md'],
       key: '',
       render: (data) => {
         return (
@@ -79,6 +82,7 @@ const HistoryRent = () => {
     },
     {
       title: 'Giờ kết thúc thuê',
+      responsive: ['xs', 'md'],
       dataIndex: '',
       key: '',
       render: (data) => {
@@ -91,6 +95,7 @@ const HistoryRent = () => {
     },
     {
       title: 'Trạng thái',
+      responsive: ['xs', 'md'],
       dataIndex: '',
       key: '',
       render: (data) => {

@@ -13,6 +13,7 @@ import {
 } from 'src/core/api/students';
 import { getUserProfile, setUserProfile } from 'src/utils/clientCache';
 import moment from 'moment';
+import { getScreenMode } from 'src/utils';
 
 const IMAGE_TYPES = ['png', 'jpg', 'jpeg', 'jfif'];
 
@@ -40,6 +41,7 @@ const FormProfile = () => {
   const user = getUserProfile();
 
   const [, setRefresh] = useState(false);
+  const { mobileMode } = getScreenMode();
 
   const { setRefreshHeader } = useContext(HeaderContext);
 
@@ -105,7 +107,10 @@ const FormProfile = () => {
   };
 
   return (
-    <div className="hl-ml-form-profile" style={{ padding: 36 }}>
+    <div
+      className="hl-ml-form-profile"
+      style={{ padding: mobileMode ? 16 : 36 }}
+    >
       <TitleStyle>Thông tin cá nhân</TitleStyle>
 
       <Form
@@ -171,7 +176,12 @@ const FormProfile = () => {
           <Input placeholder="Nhập email" disabled />
         </Form.Item>
 
-        <div style={{ display: 'flex' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: mobileMode ? 'column' : 'row',
+          }}
+        >
           <Form.Item
             label="Giới tính"
             name="gender"

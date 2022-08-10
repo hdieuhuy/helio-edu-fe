@@ -10,9 +10,10 @@ import { Form, Input, Select, DatePicker, Upload, InputNumber } from 'antd';
 import {
   uploadAvatarTeacher,
   updateTeacherProfile,
+  changeWork,
 } from 'src/core/api/teachers';
 import { getUserProfile, setUserProfile } from 'src/utils/clientCache';
-import { formatPrice } from 'src/utils';
+import { formatPrice, getScreenMode } from 'src/utils';
 import moment from 'moment';
 
 const IMAGE_TYPES = ['png', 'jpg', 'jpeg', 'jfif'];
@@ -39,6 +40,8 @@ const { Option } = Select;
 const FormProfile = () => {
   const [form] = Form.useForm();
   const user = getUserProfile();
+
+  const { mobileMode } = getScreenMode();
 
   const [, setRefresh] = useState(false);
 
@@ -124,8 +127,37 @@ const FormProfile = () => {
     return toast.error(res.data.message);
   };
 
+  const handleWorking = async () => {
+    const _isWorking = !user?.profile?.isWorking;
+
+    const res = await changeWork({
+      teacherID: user?._id,
+      isWorking: _isWorking,
+    });
+
+    if (res.data.status === 'OK') {
+      const _user = {
+        ...user,
+        profile: {
+          ...user?.profile,
+          isWorking: _isWorking,
+        },
+      };
+
+      setUserProfile(_user);
+      setRefresh((state) => !state);
+      setRefreshHeader((state) => !state);
+      return toast.success(res.data.message);
+    }
+
+    return toast.error(res.data.message);
+  };
+
   return (
-    <div className="hl-ml-form-profile" style={{ padding: 36 }}>
+    <div
+      className="hl-ml-form-profile"
+      style={{ padding: mobileMode ? 16 : 36 }}
+    >
       <TitleStyle>Thông tin cá nhân</TitleStyle>
 
       <Form
@@ -191,7 +223,12 @@ const FormProfile = () => {
           <Input placeholder="Nhập email" disabled />
         </Form.Item>
 
-        <div style={{ display: 'flex' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: mobileMode ? 'column' : 'row',
+          }}
+        >
           <Form.Item
             label="Giới tính"
             name="gender"
@@ -295,6 +332,10 @@ const FormProfile = () => {
           </Button>
         </Form.Item>
       </Form>
+
+      <Button danger={user?.profile?.isWorking} onClick={handleWorking}>
+        {user?.profile?.isWorking ? 'Tạm dừng dạy học' : 'Mở dạy học'}
+      </Button>
     </div>
   );
 };

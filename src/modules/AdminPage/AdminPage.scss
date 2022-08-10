@@ -190,3 +190,19 @@
     }
   }
 }
+
+.modal-not-sup {
+  &.ant-modal,
+  .ant-modal-content {
+    height: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    top: 0 !important;
+
+    padding-bottom: 0 !important;
+    max-width: unset !important;
+  }
+  .ant-modal-body {
+    height: calc(100vh - 110px);
+  }
+}

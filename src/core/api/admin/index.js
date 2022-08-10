@@ -28,3 +28,10 @@ export const getSubjectFavorite = () => {
     .then((res) => res)
     .catch((error) => error);
 };
+
+export const loginAdmin = (data) => {
+  return axios
+    .post(`${config}/admin/signin`, { ...data })
+    .then((res) => res)
+    .catch((error) => error);
+};

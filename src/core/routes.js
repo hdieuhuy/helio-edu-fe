@@ -14,6 +14,9 @@ import ProfilePage from 'src/modules/ProfilePage';
 import AdminPage from 'src/modules/AdminPage';
 import NewPassword from 'src/modules/AuthenticatePage/NewPassword';
 import NewsPage from 'src/modules/NewsPage';
+import AdminLoginPage from 'src/modules/AdminLoginPage';
+
+import NotSupportResponsive from 'src/modules/NotSupportResponsive';
 
 const routes = [
   {
@@ -65,6 +68,14 @@ const routes = [
   {
     path: '/admin',
     element: <AdminPage />,
+  },
+  {
+    path: '/admin/login',
+    element: <AdminLoginPage />,
+  },
+  {
+    path: '/not-support',
+    element: <NotSupportResponsive />,
   },
   {
     path: '*',

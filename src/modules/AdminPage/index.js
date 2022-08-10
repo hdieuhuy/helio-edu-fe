@@ -27,7 +27,9 @@ import {
   getTopTeacherAdmin,
 } from 'src/core/api/admin';
 import { Avatar } from 'src/components';
-import { isEmpty } from 'lodash';
+import { isEmpty, isUndefined } from 'lodash';
+
+import { useWindowSize } from 'src/utils';
 
 const { TabPane } = Tabs;
 
@@ -42,9 +44,13 @@ const AdminPage = () => {
   const navigate = useNavigate();
   const userProfile = getUserProfile();
 
+  const { width } = useWindowSize();
+
   const [totalAdmin, setTotalAdmin] = useState({});
   const [topTeacher, setTopTeacher] = useState([]);
   const [subjectFavorite, setSubjectFavorite] = useState([]);
+
+  console.log({ subjectFavorite });
 
   const data = [
     {
@@ -85,10 +91,22 @@ const AdminPage = () => {
   ];
 
   useEffect(() => {
-    if (userProfile.email === 'coestarvn205@gmail.com') return;
+    if (userProfile?.email === 'admin@gmail.com') return;
 
     navigate('/');
-  }, []);
+  }, [userProfile]);
+
+  useEffect(() => {
+    if (userProfile?.email) return;
+
+    navigate('/admin/login');
+  }, [userProfile]);
+
+  useEffect(() => {
+    if (isUndefined(width) || width >= 1375) return;
+
+    navigate('/not-support');
+  }, [width]);
 
   useEffect(() => {
     const getTotalAdmin = async () => {
@@ -258,7 +276,7 @@ const AdminPage = () => {
         </div>
 
         <div className="subject-favorite animate__animated animate__fadeInRight">
-          <div className="title">Bảng xếp hạng top gia sư được thuê</div>
+          <div className="title">Bảng dữ liệu môn học yêu thích</div>
 
           {!isEmpty(subjectFavorite) ? (
             <Empty title="Không có dữ liệu để hiển thị" />

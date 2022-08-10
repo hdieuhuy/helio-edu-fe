@@ -88,4 +88,11 @@ export const activeTeacher = (id) => {
     .catch((error) => error);
 };
 
+export const changeWork = (data) => {
+  return axiox
+    .post(`${config}/teacher/teach`, { ...data })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
 export default {};
