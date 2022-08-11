@@ -52,11 +52,13 @@ const TeacherManagment = () => {
       title: 'Công việc hiện tại',
       dataIndex: 'work',
       key: 'work',
+      width: '20%',
     },
     {
       title: 'Tốt nghiệp',
       dataIndex: 'graduate',
       key: 'graduate',
+      width: '15%',
     },
     {
       title: 'Giá thuê',
@@ -76,6 +78,7 @@ const TeacherManagment = () => {
       title: 'CV',
       dataIndex: 'urlDegree',
       key: 'urlDegree',
+      width: '25%',
       render: (record) => {
         if (!record) return null;
 

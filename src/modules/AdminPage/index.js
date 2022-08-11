@@ -50,45 +50,7 @@ const AdminPage = () => {
   const [topTeacher, setTopTeacher] = useState([]);
   const [subjectFavorite, setSubjectFavorite] = useState([]);
 
-  console.log({ subjectFavorite });
-
-  const data = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      amt: 2100,
-    },
-  ];
+  console.log({ topTeacher });
 
   useEffect(() => {
     if (userProfile?.email === 'admin@gmail.com') return;
@@ -276,15 +238,17 @@ const AdminPage = () => {
         </div>
 
         <div className="subject-favorite animate__animated animate__fadeInRight">
-          <div className="title">Bảng dữ liệu môn học yêu thích</div>
+          <div className="title">
+            Bảng dữ liệu môn học yêu thích trong vòng 1 tháng gần nhất
+          </div>
 
-          {!isEmpty(subjectFavorite) ? (
+          {isEmpty(subjectFavorite) ? (
             <Empty title="Không có dữ liệu để hiển thị" />
           ) : (
             <BarChart
-              width={850}
+              width={900}
               height={600}
-              data={data}
+              data={subjectFavorite}
               margin={{
                 top: 5,
                 right: 30,
@@ -297,7 +261,7 @@ const AdminPage = () => {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="uv" fill="#82ca9d" />
+              <Bar dataKey="count" label="Số lượng" fill="#82ca9d" />
             </BarChart>
           )}
         </div>

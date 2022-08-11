@@ -9,6 +9,13 @@
 
 @import '~antd/dist/antd.css';
 
+.ant-btn-primary,
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  border-color: var(--primary) !important;
+  background: var(--primary) !important;
+}
+
 * {
   -moz-hyphens: none;
   -ms-hyphens: none;

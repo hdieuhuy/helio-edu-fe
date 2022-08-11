@@ -24,7 +24,7 @@ export const getComments = () => {
 
 export const getSubjectFavorite = () => {
   return axios
-    .get(`${config}/admin/subject`)
+    .get(`${config}/admin/subject/${123}`)
     .then((res) => res)
     .catch((error) => error);
 };
