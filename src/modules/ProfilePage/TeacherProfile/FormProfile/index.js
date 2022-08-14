@@ -60,7 +60,6 @@ const FormProfile = () => {
     'Tin học',
     'Ngoại ngữ khác',
 
-    'Năng khiếu',
     'Luyện thi đại học',
     'Luyện chữ',
     'Tài chính',
@@ -326,7 +325,7 @@ const FormProfile = () => {
           </Select>
         </Form.Item>
 
-        <Form.Item>
+        <Form.Item style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button type="primary" htmlType="submit">
             Đổi thông tin cá nhân
           </Button>

@@ -7,9 +7,14 @@ const HeaderConsumer = HeaderContext.Consumer;
 
 const HeaderProvider = ({ children }) => {
   const [refreshHeader, setRefreshHeader] = useState(false);
+  const [userProfile, setUserProfile] = useState({});
 
   return (
-    <Provider value={{ refreshHeader, setRefreshHeader }}>{children}</Provider>
+    <Provider
+      value={{ refreshHeader, userProfile, setRefreshHeader, setUserProfile }}
+    >
+      {children}
+    </Provider>
   );
 };
 

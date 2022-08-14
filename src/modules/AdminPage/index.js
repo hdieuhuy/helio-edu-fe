@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Empty, Tabs } from 'antd';
-import { CopyOutlined, TeamOutlined } from '@ant-design/icons';
+import { CopyOutlined, TeamOutlined, HomeOutlined } from '@ant-design/icons';
 
 import { useNavigate } from 'react-router-dom';
 import { getUserProfile } from 'src/utils/clientCache';
@@ -22,14 +22,15 @@ import CommentManagment from './CommentManangment';
 import CountUp from 'react-countup';
 
 import {
+  getSubject,
   getAdminTotal,
-  getSubjectFavorite,
   getTopTeacherAdmin,
 } from 'src/core/api/admin';
 import { Avatar } from 'src/components';
 import { isEmpty, isUndefined } from 'lodash';
 
 import { useWindowSize } from 'src/utils';
+import ClassroomManangment from './ClassroomManagment';
 
 const { TabPane } = Tabs;
 
@@ -48,9 +49,7 @@ const AdminPage = () => {
 
   const [totalAdmin, setTotalAdmin] = useState({});
   const [topTeacher, setTopTeacher] = useState([]);
-  const [subjectFavorite, setSubjectFavorite] = useState([]);
-
-  console.log({ topTeacher });
+  const [subject, setSubject] = useState([]);
 
   useEffect(() => {
     if (userProfile?.email === 'admin@gmail.com') return;
@@ -94,13 +93,13 @@ const AdminPage = () => {
   }, []);
 
   useEffect(() => {
-    const _getSubjectFavorite = async () => {
-      const res = await getSubjectFavorite();
+    const _getSubject = async () => {
+      const res = await getSubject();
 
-      setSubjectFavorite(res.data.data.subject);
+      setSubject(res.data.data.subject);
     };
 
-    _getSubjectFavorite();
+    _getSubject();
   }, []);
 
   const newIndex = range({ from: 4, length: 10 });
@@ -242,13 +241,13 @@ const AdminPage = () => {
             Bảng dữ liệu môn học yêu thích trong vòng 1 tháng gần nhất
           </div>
 
-          {isEmpty(subjectFavorite) ? (
+          {isEmpty(subject) ? (
             <Empty title="Không có dữ liệu để hiển thị" />
           ) : (
             <BarChart
               width={900}
               height={600}
-              data={subjectFavorite}
+              data={subject}
               margin={{
                 top: 5,
                 right: 30,
@@ -290,6 +289,18 @@ const AdminPage = () => {
           key="2"
         >
           <CommentManagment />
+        </TabPane>
+
+        <TabPane
+          tab={
+            <div>
+              <HomeOutlined />
+              <span>Lớp học</span>
+            </div>
+          }
+          key="3"
+        >
+          <ClassroomManangment />
         </TabPane>
       </Tabs>
     </div>

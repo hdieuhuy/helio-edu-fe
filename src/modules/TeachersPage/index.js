@@ -24,7 +24,6 @@ const TeachersPage = () => {
     'Tin học',
     'Ngoại ngữ khác',
 
-    'Năng khiếu',
     'Luyện thi đại học',
     'Luyện chữ',
     'Tài chính',
@@ -42,7 +41,7 @@ const TeachersPage = () => {
 
   const renderTeacher = () => {
     const _teacher = teachers
-      ?.filter((item) => item?.active)
+      ?.filter((item) => item?.active && item?.profile?.isWorking)
       ?.filter((item) => {
         const filterItem = item?.profile?.subjects?.includes(
           optionsFilter?.subject

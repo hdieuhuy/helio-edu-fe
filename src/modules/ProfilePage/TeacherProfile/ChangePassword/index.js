@@ -19,7 +19,6 @@ const TitleStyle = styled.div`
 const ChangePassword = () => {
   const [form] = Form.useForm();
   const user = getUserProfile();
-  console.log({ user });
 
   const onFinish = async (values) => {
     const res = await changePasswordTeacher({

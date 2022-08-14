@@ -36,7 +36,6 @@ const SignUpTeacherPage = () => {
     'Tin học',
     'Ngoại ngữ khác',
 
-    'Năng khiếu',
     'Luyện thi đại học',
     'Luyện chữ',
     'Tài chính',

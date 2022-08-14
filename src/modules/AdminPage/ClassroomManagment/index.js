@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Table, Tag } from 'antd';
 
-import { getListClassroom } from 'src/core/api/classroom';
+import { getListClassroom } from 'src/core/api/admin';
 import { isEmpty } from 'lodash';
 import moment from 'moment';
 

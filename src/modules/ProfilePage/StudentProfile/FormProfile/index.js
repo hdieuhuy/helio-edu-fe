@@ -208,7 +208,7 @@ const FormProfile = () => {
           <Input placeholder="Nhập địa chỉ chi tiết" />
         </Form.Item>
 
-        <Form.Item>
+        <Form.Item style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button type="primary" htmlType="submit">
             Đổi thông tin cá nhân
           </Button>

@@ -36,11 +36,4 @@ export const getHistoryRent = ({ studentID }) => {
     .catch((error) => error);
 };
 
-export const getListClassroom = () => {
-  return axios
-    .get(`${config}/classroom/admin`)
-    .then((res) => res)
-    .catch((error) => error);
-};
-
 export default {};

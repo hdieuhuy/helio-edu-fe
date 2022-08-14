@@ -71,12 +71,12 @@ const Header = () => {
 
   const logOut = () => {
     clearUserProfile();
-    toast.success('Đăng xuất thành công!');
+    window.location.reload();
 
     setTimeout(() => {
       navigate('/');
-      window.location.reload();
-    }, 500);
+      toast.success('Đăng xuất thành công!');
+    }, 100);
   };
 
   const goToProfile = () => {
@@ -109,6 +109,9 @@ const Header = () => {
           },
           {
             label: <div onClick={goToProfile}>Hồ sơ cá nhân</div>,
+          },
+          user?.email === 'admin@gmail.com' && {
+            label: <div onClick={() => navigate('/admin')}>Trang Admin</div>,
           },
           {
             label: (

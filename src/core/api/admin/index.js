@@ -22,9 +22,9 @@ export const getComments = () => {
     .catch((error) => error);
 };
 
-export const getSubjectFavorite = () => {
+export const getSubject = () => {
   return axios
-    .get(`${config}/admin/subject/${123}`)
+    .get(`${config}/admin/subject`)
     .then((res) => res)
     .catch((error) => error);
 };
@@ -32,6 +32,13 @@ export const getSubjectFavorite = () => {
 export const loginAdmin = (data) => {
   return axios
     .post(`${config}/admin/signin`, { ...data })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+export const getListClassroom = () => {
+  return axios
+    .get(`${config}/admin/classroom`)
     .then((res) => res)
     .catch((error) => error);
 };

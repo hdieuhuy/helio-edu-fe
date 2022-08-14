@@ -5,20 +5,16 @@ import useCheckPathName from './useCheckPathname';
 import Footer from './Footer';
 import Header from './Header';
 
-import { HeaderProvider } from 'src/contexts/header';
-
 const DefaultLayout = ({ children }) => {
   const isSinglePage = useCheckPathName();
 
   return (
     <div className="layout">
-      <HeaderProvider>
-        <Header />
+      <Header />
 
-        <div className="layout__container">{children}</div>
+      <div className="layout__container">{children}</div>
 
-        {!isSinglePage && <Footer />}
-      </HeaderProvider>
+      {!isSinglePage && <Footer />}
     </div>
   );
 };

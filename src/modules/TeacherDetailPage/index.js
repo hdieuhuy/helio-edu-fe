@@ -14,10 +14,12 @@ import { createClassroom, actionTeacher } from 'src/core/api/classroom';
 
 import { Avatar, Button } from 'src/components';
 import { addHours, formatPrice } from 'src/utils';
-import { getUserProfile } from 'src/utils/clientCache';
+import { getUserProfile, setUserProfile } from 'src/utils/clientCache';
+import { HeaderContext } from 'src/contexts/header';
 
 const TeacherDetailPage = () => {
   const { socket } = useContext(SocketContext);
+  const { setRefreshHeader } = useContext(HeaderContext);
   const { id } = useParams();
 
   const [data, setData] = useState({});
@@ -85,6 +87,21 @@ const TeacherDetailPage = () => {
     setTimeout(() => {
       actionTeacher({ id: data?.classroom?._id, isJoin: false });
     }, 1000 * 60 * 3);
+  }, [data]);
+
+  useEffect(() => {
+    if (data?.status !== 'ACTIVE' || !isCurrentStudent) return;
+
+    const newUserProfile = {
+      ...user,
+      profile: {
+        ...user.profile,
+        money: user.profile.money - teacherInfo?.profile?.priceRent,
+      },
+    };
+
+    setRefreshHeader((prev) => !prev);
+    setUserProfile(newUserProfile);
   }, [data]);
 
   useEffect(() => {

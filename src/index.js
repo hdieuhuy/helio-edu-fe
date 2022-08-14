@@ -14,17 +14,21 @@ import './assets/fonts/index.scss';
 import './assets/styles/main.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { HeaderProvider } from 'src/contexts/header';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
-      <DefaultLayout>
-        <SocketProvider>
-          <App />
-          <ToastContainer hideProgressBar autoClose={1500} theme="colored" />
-        </SocketProvider>
-      </DefaultLayout>
-    </Router>
+    <HeaderProvider>
+      <Router>
+        <DefaultLayout>
+          <SocketProvider>
+            <App />
+            <ToastContainer hideProgressBar autoClose={1500} theme="colored" />
+          </SocketProvider>
+        </DefaultLayout>
+      </Router>
+    </HeaderProvider>
   </React.StrictMode>
 );
 
